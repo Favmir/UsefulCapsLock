@@ -1,0 +1,1 @@
+powershell "$loc='%~dp0\Launch Useful Caps Lock.bat';$icon='%~dp0\Icons\icon.ico';$s=(New-Object -COM WScript.Shell).CreateShortcut('%userprofile%\Start Menu\Programs\Startup\Useful Caps Lock.lnk');$s.TargetPath=$loc;$s.IconLocation=$icon;$s.Save()"
