@@ -1,0 +1,45 @@
+2020/09/XX	v1.1.6
+- Opening Gui now cancels script suspend
+- Added App folder
+- Added "Useful Caps Lock" shortcut to take batch file's place
+- Renamed "AddButtons.ahk" to "BuildButtons.ahk"
+- Assigned ^() function to Key6
+- Added second math layout
+
+2020/09/27	v1.1.5
+- Added "Add to Startup.bat"
+- Added "Launch Useful Caps Lock.bat"
+- Moved script components into separate folders(Scripts, Settings, Icons)
+- Added custom tray icon and menu
+- Added Background color setting
+
+2020/09/XX	v1.1
+- General code cleanup.
+- Added settings save&load functionality
+- Added "AddButtons.ahk" to separate GUI initial build code
+- Added "Changelog.txt"
+- Added "GuiSize.settings"
+- Added "Keys.settings"
+- Added "Keys_Default.settings"
+- Added "Localization.settings"
+
+2020/09/15	v1.0
+- Code cleanup
+- Enhanced keyboard gui
+- Removed previous main menu(made obsolete by the keyboard gui)
+
+2020/09/XX	v0.9
+- Added button to bring up custom keyboard gui to the main menu
+- Removed options submenu(made obsolete by the new keyboard gui)
+
+2020/09/09	v0.6
+- Added special characters input functionality
+
+2020/08/25	v0.5
+- Added localization support
+
+2020/08/06	v0.3
+- Added menu that can be brought up with Win+CapsLock
+
+2020/08/03	v0.1
+- Program created
