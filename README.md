@@ -1,4 +1,6 @@
 # UsefulCapsLock
+![Gui](/Desc.jpg)
+
 An AutoHotKey Script that helps you type, you won't even need a Pointing Stick(a.k.a. red nipple) anymore
 
 Press [Windows + Caps Lock] to bring out the menu.
