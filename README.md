@@ -15,7 +15,7 @@ Press [Windows + Caps Lock] to bring out the menu.
 
 [Caps Lock + grayed out key] carries out pre-determined functions. You can see what exactly they do by clicking on the GUI.
 
-[Mouse Lock] checkbox disables mouse input and only enables it when you press [Caps Lock + S], so you won’t have to suffer from Touchpad palm press syndrome anymore.
+[Mouse Lock] checkbox disables mouse input and only enables it when you press [Caps Lock + W], so you won’t have to suffer from Touchpad palm press syndrome anymore.
 
 I've left this script running while playing games, and so far had no problem at all with single-player games.
 I've only tested a few multiplayer games:
