@@ -28,4 +28,4 @@ I've only tested a few multiplayer games:
 
 ## To Do List
 - [ ] Rewrite this botched mess of a code
-- [ ] Add Unicode character searcher
+- [ ] Add Unicode character browser
