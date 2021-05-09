@@ -1,8 +1,12 @@
 # UsefulCapsLock
 ![Gui](/Desc.jpg)
 
-An AutoHotKey Script that helps you type.
-I made this script to solve my problem of 1. palm grazing the touchpad constantly 2. arrow keys are in such inconvient places when you need to move your cursor through text a lot
+A horribly written AutoHotKey Script that helps you type.
+
+I made this script to solve my problem of
+1. palm grazing the touchpad constantly
+2. arrow keys are in such inconvient places when you need to move your cursor through text a lot
+
 Some people solve these problems via a Pointing Stick(a.k.a. red nipple) but I prefer my solution.
 
 Press [Windows + Caps Lock] to bring out the menu.
