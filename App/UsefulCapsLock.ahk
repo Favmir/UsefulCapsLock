@@ -14,10 +14,11 @@
 Menu, Tray, Icon,,, 1	;freeze current icon
 Menu, Tray, Icon, %A_ScriptDir%\Icons\icon(32x32).png, 1, 1
 Menu, Tray, NoStandard
+Menu, Tray, Click, 1
 Menu, Tray, Add, &Open Useful Caps Lock, TrayGui
 Menu, Tray, Add, &Pause Program, TrayPause
 Menu, Tray, Add, &Quit, TrayQuit
-Menu, Tray, Default, &Open Useful Caps Lock
+Menu, Tray, Default, &Pause Program
 
 SetBatchLines -1
 
@@ -38,7 +39,19 @@ LayoutTotalH := LayoutHG * 6 + LayoutG
 
 ;=========================== Initialize
 isWelcomeDone := false
-MsgBox, 4096, %PopTitleWelcome%, %PopDescWelcome%,
+#include %A_ScriptDir%\Settings\NoStartPop.settings
+if(NoStartPop == 0)
+{
+	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
+	ifMsgBox, Cancel
+	{
+		FileDelete %A_ScriptDir%\Settings\NoStartPop.settings
+		FileAppend, 
+		(
+		NoStartPop := 1
+		), %A_ScriptDir%\Settings\NoStartPop.settings, UTF-8
+	}
+}
 isWelcomeDone := true
 EnableHK := false
 SetCapsLockState Off
@@ -359,8 +372,7 @@ return
 Clipboard := ""
 Send ^{x}
 SendRaw ^()
-Send {Left}
-Send ^{v}
+Send {Left}^{v}{Right}
 Clipboard := ""
 return
 
@@ -393,50 +405,50 @@ s & `;::Send +{End}
 
 
 ; Custom Keybinds
-`::Send %KeyGrave%
-1::Send %Key1%
-2::Send %Key2%
-3::Send %Key3%
-4::Send %Key4%
-5::Send %Key5%
-;6::Send %Key6%
-7::Send %Key7%
-8::Send %Key8%
-9::Send %Key9%
-0::Send %Key0%
--::Send %KeyHyphen%
-=::Send %KeyEqual%
-q::Send %KeyQ%
-;w::Send %KeyW%
-;e::Send %KeyE%
-;r::Send %KeyR%
-t::Send %KeyT%
-y::Send %KeyY%
-;u::Send %KeyU%
-;i::Send %KeyI%
-;o::Send %KeyO%
-p::Send %KeyP%
-[::Send %KeyLBracket%
-]::Send %KeyRBracket%
-\::Send %KeyBSlash%
-a::Send %KeyA%
-;s::Send %KeyS%
-;d::Send %KeyD%
-;f::Send %KeyF%
-g::Send %KeyG%
-;h::Send %KeyH%
-;j::Send %KeyJ%
-;k::Send %KeyK%
-;l::Send %KeyL%
-;`;::Send %KeyColon%
-'::Send %KeyQuote%
-z::Send %KeyZ%
-x::Send %KeyX%
-c::Send %KeyC%
-v::Send %KeyV%
-b::Send %KeyB%
-n::Send %KeyN%
-m::Send %KeyM%
-,::Send %KeyComma%
-.::Send %KeyPeriod%
-/::Send %KeySlash%
+`::Send {Space}{Backspace}%KeyGrave%
+1::Send {Space}{Backspace}%Key1%
+2::Send {Space}{Backspace}%Key2%
+3::Send {Space}{Backspace}%Key3%
+4::Send {Space}{Backspace}%Key4%
+5::Send {Space}{Backspace}%Key5%
+;6::Send {Space}{Backspace}%Key6%
+7::Send {Space}{Backspace}%Key7%
+8::Send {Space}{Backspace}%Key8%
+9::Send {Space}{Backspace}%Key9%
+0::Send {Space}{Backspace}%Key0%
+-::Send {Space}{Backspace}%KeyHyphen%
+=::Send {Space}{Backspace}%KeyEqual%
+q::Send {Space}{Backspace}%KeyQ%
+;w::Send {Space}{Backspace}%KeyW%
+;e::Send {Space}{Backspace}%KeyE%
+;r::Send {Space}{Backspace}%KeyR%
+t::Send {Space}{Backspace}%KeyT%
+y::Send {Space}{Backspace}%KeyY%
+;u::Send {Space}{Backspace}%KeyU%
+;i::Send {Space}{Backspace}%KeyI%
+;o::Send {Space}{Backspace}%KeyO%
+p::Send {Space}{Backspace}%KeyP%
+[::Send {Space}{Backspace}%KeyLBracket%
+]::Send {Space}{Backspace}%KeyRBracket%
+\::Send {Space}{Backspace}%KeyBSlash%
+a::Send {Space}{Backspace}%KeyA%
+;s::Send {Space}{Backspace}%KeyS%
+;d::Send {Space}{Backspace}%KeyD%
+;f::Send {Space}{Backspace}%KeyF%
+g::Send {Space}{Backspace}%KeyG%
+;h::Send {Space}{Backspace}%KeyH%
+;j::Send {Space}{Backspace}%KeyJ%
+;k::Send {Space}{Backspace}%KeyK%
+;l::Send {Space}{Backspace}%KeyL%
+;`;::Send {Space}{Backspace}%KeyColon%
+'::Send {Space}{Backspace}%KeyQuote%
+z::Send {Space}{Backspace}%KeyZ%
+x::Send {Space}{Backspace}%KeyX%
+c::Send {Space}{Backspace}%KeyC%
+v::Send {Space}{Backspace}%KeyV%
+b::Send {Space}{Backspace}%KeyB%
+n::Send {Space}{Backspace}%KeyN%
+m::Send {Space}{Backspace}%KeyM%
+,::Send {Space}{Backspace}%KeyComma%
+.::Send {Space}{Backspace}%KeyPeriod%
+/::Send {Space}{Backspace}%KeySlash%

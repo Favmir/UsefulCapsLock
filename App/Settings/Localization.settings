@@ -1,12 +1,12 @@
 ;========== Change these strings for easy localization.
 PopTitleWelcome := "Welcome"
-PopDescWelcome := "Press`n`n[Win]+[CapsLock]`n[Alt]+[CapsLock]`n`nto open menu."
+PopDescWelcome := "Press`n`n[Win]+[CapsLock]`n[Alt]+[CapsLock]`n`nto open menu.`n`n[Cancel] to Never Show`nThis Message Again"
 
 MenuDescFront := "Press Caps Lock and another key simultaneously to use.`nTo customize, type in desired characters into the field."
 MenuDescWin := "Win + Caps Lock`nShow interface"
 
 MenuTitleAbout := "About"
-MenuDescAbout := "Useful CapsLock v1.1.6`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
+MenuDescAbout := "Useful CapsLock v1.3.1`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
 
 PopTitleMouseLock := "Touchpad lock activated"
 PopDescMouseLock := "No more Touchpad palm presses!`n`nMouse is disabled by default.`nPress {CapsLock + W} to use mouse.`nPressing {CapsLock} disables mouse again."
