@@ -9,8 +9,14 @@
 ;	When mouse is disabled, press CapsLock + W to use Mouse.
 ;	(only happens when enabled in options)
 ;==========================================
-
 #SingleInstance Force
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+; #Warn  ; Enable warnings to assist with detecting common errors.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+SetBatchLines -1
+
+;============ Add Tray ============
 Menu, Tray, Icon,,, 1	;freeze current icon
 Menu, Tray, Icon, %A_ScriptDir%\Icons\icon(32x32).png, 1, 1
 Menu, Tray, NoStandard
@@ -20,36 +26,22 @@ Menu, Tray, Add, &Pause Program, TrayPause
 Menu, Tray, Add, &Quit, TrayQuit
 Menu, Tray, Default, &Pause Program
 
-SetBatchLines -1
 
-#include %A_ScriptDir%\Settings\Localization.settings
-#include %A_ScriptDir%\Settings\Gui.settings
-LayoutWBSlsh := LayoutWBSpc + LayoutW - LayoutWTab
-LayoutWEnter := LayoutWBSpc + LayoutW + LayoutW - LayoutWCaps + LayoutG
-LayoutWRShift := LayoutWBSpc + LayoutW + LayoutW + LayoutW - LayoutWShift + LayoutG + LayoutG
-
-LayoutWG := LayoutW + LayoutG
-LayoutHG := LayoutH + LayoutG
-LayoutWTabG := LayoutWTab + LayoutG
-LayoutWCapsG :=  LayoutWCaps + LayoutG
-LayoutWShiftG := LayoutWShift + LayoutG
-
-LayoutTotalW := LayoutG + LayoutWG * 13 + LayoutWBSpc + LayoutG
-LayoutTotalH := LayoutHG * 6 + LayoutG
+#include %A_ScriptDir%\Settings\Localization.ucl
 
 ;=========================== Initialize
 isWelcomeDone := false
-#include %A_ScriptDir%\Settings\NoStartPop.settings
+#include %A_ScriptDir%\Settings\NoStartPop.ucl
 if(NoStartPop == 0)
 {
 	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
 	ifMsgBox, Cancel
 	{
-		FileDelete %A_ScriptDir%\Settings\NoStartPop.settings
+		FileDelete %A_ScriptDir%\Settings\NoStartPop.ucl
 		FileAppend, 
 		(
 		NoStartPop := 1
-		), %A_ScriptDir%\Settings\NoStartPop.settings, UTF-8
+		), %A_ScriptDir%\Settings\NoStartPop.ucl, UTF-8
 	}
 }
 isWelcomeDone := true
@@ -58,12 +50,12 @@ SetCapsLockState Off
 EnableSuper := false
 
 
+
+#include %A_ScriptDir%\Settings\Keys.ucl
+#include %A_ScriptDir%\Scripts\BuildMainGui.ahk
+
 Gui -SysMenu
 Gui, Show, w%LayoutTotalW% h%LayoutTotalH% Hide, Useful Caps Lock
-#include %A_ScriptDir%\Settings\Keys.settings
-#include %A_ScriptDir%\Scripts\BuildMainGui.ahk
-#include %A_ScriptDir%\Scripts\BuildSideGui.ahk
-
 
 return
 
@@ -107,6 +99,14 @@ DescShift:
 	MsgBox, 4096,%MenuTitleKeys%, %MenuDescShift%,
 return
 
+DescWin:
+	MsgBox, 4096, %MenuTitleKeys%, %MenuDescWin%,
+return
+
+DescLAlt:
+	MsgBox, 4096, %MenuTitleKeys%, %MenuDescLAlt%,
+return
+
 DescMLock:
 	MsgBox, 4096,%MenuTitleKeys%, %MenuDescMLock%,
 return
@@ -147,7 +147,7 @@ GuiAbout:
 return
 
 GuiDefault:
-	FileCopy Keys_Default.settings, Keys.settings, 1
+	FileCopy Keys_Default.ucl, Keys.ucl, 1
 	GoSub ReadDefaultSettings
 	GoSub GuiRefresh
 return
@@ -201,15 +201,15 @@ GuiRefresh:
 return
 
 ReadSettings:
-	#include %A_ScriptDir%\Settings\Keys.settings
+	#include %A_ScriptDir%\Settings\Keys.ucl
 return
 
 ReadDefaultSettings:
-	#include %A_ScriptDir%\Settings\Keys_Default.settings
+	#include %A_ScriptDir%\Settings\Keys_Default.ucl
 return
 
 WriteSettings:
-	FileDelete %A_ScriptDir%\Settings\Keys.settings
+	FileDelete %A_ScriptDir%\Settings\Keys.ucl
 	FileAppend,
 	(
 UpScroll := %UpScroll%
@@ -246,7 +246,7 @@ KeyM = %KeyM%
 KeyComma = %KeyComma%
 KeyPeriod = %KeyPeriod%
 KeySlash = %KeySlash%
-	), %A_ScriptDir%\Settings\Keys.settings, UTF-8
+	), %A_ScriptDir%\Settings\Keys.ucl, UTF-8
 return
 
 GuiPause:
@@ -362,19 +362,30 @@ if LockMouse{
 return
 
 Up::
-EnableSuper :=true
+EnableSuper := true
 return
 Down::
 EnableSuper := false
 return
 
 6::
+Clipsaved := ClipboardAll
 Clipboard := ""
 Send ^{x}
 SendRaw ^()
 Send {Left}^{v}{Right}
-Clipboard := ""
+Clipboard := Clipsaved
 return
+;=== commented out buggy version ==
+;6::
+;Clipsaved := ClipboardAll
+;Clipboard := ""
+;Send ^{c}
+;Clipwait
+;Clipboard := "^(" Clipboard ")"
+;SendRaw %Clipboard%
+;Clipboard := Clipsaved
+;return
 
 ; Navigate: Press CapsLock and these keys to navigate without moving your hands.
 i::Send {Up}

@@ -1,3 +1,7 @@
+2021/12/XX	v1.4.0
+- Improved ^() key function
+- Added Ctrl row to Gui
+
 2021/10/03	v1.3.1
 - Fixed new bug introduced in recent Windows update
 - Added option to disable startup popup message box
