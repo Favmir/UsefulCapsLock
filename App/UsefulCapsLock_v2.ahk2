@@ -1,0 +1,134 @@
+;==========================================
+; Title:  Useful Caps Lock (rewritten in AHK v2)
+; Author: Favmir (FavmirY@gmail.com)
+; Description:
+;	This scripts repurposes the CapsLock button so that
+;	upon pressing it you enter a special input mode.
+;	Press Windows/Alt + CapsLock to bring up the menu.
+;	If you want to use the original CapsLock function, press Shift + CapsLock
+;	When mouse is disabled, press CapsLock + W to use Mouse.
+;	(only happens when enabled in options)
+;==========================================
+#Requires AutoHotkey v2.0-beta
+
+
+#SingleInstance Force
+#Warn  ; Enable warnings to assist with detecting common errors.
+SendMode("Input")  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
+
+#Include %A_WorkingDir%\Settings\Localization.ahk
+
+readKBSettings(){
+    ;[Scroll]
+    scrollUp := IniRead("\Settings\Gui.ini","Scroll", scrollUp)
+    scrollDown := IniRead("\Settings\Gui.ini","Scroll", scrollDown)
+    ;[Keybind]
+    keyGrave := IniRead("\Settings\Gui.ini","Keybind", keyGrave)
+    key1 := IniRead("\Settings\Gui.ini","Keybind", key1)
+    key2 := IniRead("\Settings\Gui.ini","Keybind", key2)
+    key3 := IniRead("\Settings\Gui.ini","Keybind", key3)
+    key4 := IniRead("\Settings\Gui.ini","Keybind", key4)
+    key5 := IniRead("\Settings\Gui.ini","Keybind", key5)
+    key7 := IniRead("\Settings\Gui.ini","Keybind", key7)
+    key8 := IniRead("\Settings\Gui.ini","Keybind", key8)
+    key9 := IniRead("\Settings\Gui.ini","Keybind", key9)
+    key0 := IniRead("\Settings\Gui.ini","Keybind", key0)
+    keyHyphen := IniRead("\Settings\Gui.ini","Keybind", keyHyphen)
+    keyEqual := IniRead("\Settings\Gui.ini","Keybind", keyEqual)
+    keyQ := IniRead("\Settings\Gui.ini","Keybind", keyQ)
+    keyT := IniRead("\Settings\Gui.ini","Keybind", keyT)
+    keyY := IniRead("\Settings\Gui.ini","Keybind", keyY)
+    keyP := ""
+    keyLBracket := IniRead("\Settings\Gui.ini","Keybind", keyLBracket)
+    keyRBracket := IniRead("\Settings\Gui.ini","Keybind", keyRBracket)
+    keyBSlash := IniRead("\Settings\Gui.ini","Keybind", keyBSlash)
+    keyA := ""
+    keyG := IniRead("\Settings\Gui.ini","Keybind", keyG)
+    keyQuote := IniRead("\Settings\Gui.ini","Keybind", keyQuote)
+    keyZ := IniRead("\Settings\Gui.ini","Keybind", keyZ)
+    keyX := IniRead("\Settings\Gui.ini","Keybind", keyX)
+    keyC := IniRead("\Settings\Gui.ini","Keybind", keyC)
+    keyV := IniRead("\Settings\Gui.ini","Keybind", keyV)
+    keyB := IniRead("\Settings\Gui.ini","Keybind", keyB)
+    keyN := IniRead("\Settings\Gui.ini","Keybind", keyN)
+    keyM := IniRead("\Settings\Gui.ini","Keybind", keyM)
+    keyComma := IniRead("\Settings\Gui.ini","Keybind", keyComma)
+    keyPeriod := IniRead("\Settings\Gui.ini","Keybind", keyPeriod)
+    keySlash := IniRead("\Settings\Gui.ini","Keybind", keySlash)
+}
+
+
+
+
+;============ Add Tray ============
+TraySetIcon("%A_WorkingDir%\Icons\icon(32x32).png",,)
+A_TrayMenu.Delete() ; V1toV2: not 100% replacement of NoStandard, Only if NoStandard is used at the beginning
+A_TrayMenu.ClickCount("1")
+A_TrayMenu.Add("&Open Useful Caps Lock", TrayGui)
+A_TrayMenu.Add("&Pause Program", TrayPause)
+A_TrayMenu.Add("&Quit", TrayQuit)
+A_TrayMenu.Default := "&Pause Program"
+
+
+;=========================== Initialize
+isWelcomeDone := false
+noStartPop := IniRead("\Settings\Gui.ini","Start",noStartPop)
+if(noStartPop == false)
+{
+	msgResult := MsgBox(pDescWelcome, pTitleWelcome, 4097)
+	if (msgResult == "Cancel")
+	{
+		IniWrite(true,A_ScriptDir "\Settings\Gui.ini","Start", "noStartPop")
+	}
+}
+isWelcomeDone := true
+EnableHK := false
+SetCapsLockState("Off")
+EnableSuper := false
+
+
+
+MsgBox(keySlash,"",)
+
+;#Include %A_ScriptDir%"\Scripts\BuildMainGui.ahk"
+
+myGui := Gui()
+myGui.Opt("-SysMenu")
+myGui.Title := "Useful Caps Lock"
+myGui.Show("w" . LayoutTotalW . " h" . LayoutTotalH . " Hide")
+
+return
+
+TrayGui(A_ThisMenuItem, A_ThisMenuItemPos, MyMenu)
+{ ; V1toV2: Added bracket
+	if (A_IsSuspended = 1)
+	{
+		TrayPause()
+	}
+	GuiOpen()
+return
+} ; V1toV2: Added Bracket before label
+
+TrayPause(A_ThisMenuItem, A_ThisMenuItemPos, MyMenu)
+{ ; V1toV2: Added bracket
+Tray.ToggleCheck("&Pause Program")
+if (A_IsSuspended = 1)
+{
+	Suspend(false)
+	Tray.Icon(A_ScriptDir . "\Icons\icon(32x32).png", "1", "1")
+}
+else
+{
+	Tray.Icon(A_ScriptDir . "\Icons\icon_off(32x32).png", "1", "1")
+	myGui.Title := "Useful Caps Lock"
+	myGui.Show("Hide")
+	Suspend(true)
+}
+return
+} ; V1toV2: Added Bracket before label
+
+TrayQuit(A_ThisMenuItem, A_ThisMenuItemPos, MyMenu)
+{ ; V1toV2: Added bracket
+	ExitApp()
+return
