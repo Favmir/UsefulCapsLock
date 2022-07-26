@@ -372,9 +372,42 @@ return
 Clipsaved := ClipboardAll
 Clipboard := ""
 Send ^{x}
-SendRaw ^()
-Send {Left}^{v}{Right}
+ClipWait, 1
+if(RegExMatch(Clipboard, "[^0-9+\-\(\)=ni]") == 0){ ;can be superscriptified ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
+	;Msgbox, "Can be superscriptized" + %Clipboard%
+	Clipboard := StrReplace(Clipboard, "0", "⁰",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "1", "¹",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "2", "²",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "3", "³",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "4", "⁴",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "5", "⁵",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "6", "⁶",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "7", "⁷",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "8", "⁸",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "9", "⁹",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "+", "⁺",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "-", "⁻",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "=", "⁼",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "(", "⁽",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, ")", "⁾",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "n", "ⁿ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "i", "ⁱ",, Limit := -1)
+	;ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ
+	Clipboard := StrReplace(Clipboard, "x", "ˣ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "y", "ʸ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "z", "ᶻ",, Limit := -1)
+	;Msgbox, %Clipboard%
+	SendRaw, % Clipboard
+}else{
+	;Msgbox, "Cannot be superscriptized"
+	if(RegExMatch(Clipboard, "`r`n") != 0){
+		Clipboard := StrReplace(Clipboard, "`r`n", "",, Limit := -1)
+		SendRaw ^(%Clipboard%)`n
+	}
+	else SendRaw ^(%Clipboard%)
+}
 Clipboard := Clipsaved
+Clipsaved := ""	;free up memory
 return
 ;=== commented out buggy version ==
 ;6::

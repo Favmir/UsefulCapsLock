@@ -6,7 +6,7 @@ MenuDescFront := "Press Caps Lock and another key simultaneously to use.`nTo cus
 MenuDescFront2 := "Win + Caps Lock`nShow interface"
 
 MenuTitleAbout := "About"
-MenuDescAbout := "Useful CapsLock v1.4.0`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
+MenuDescAbout := "Useful CapsLock v1.5.0`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
 
 PopTitleMouseLock := "Touchpad lock activated"
 PopDescMouseLock := "No more Touchpad palm presses!`n`nMouse is disabled by default.`nPress {CapsLock + W} to use mouse.`nPressing {CapsLock} disables mouse again."
@@ -16,7 +16,7 @@ MenuDescSpecialChars := "{‰} Per Mille`n{°}(U+00B0) Degree Symbol`n{·}(U+00B
 
 MenuTitleKeys := "About Keys"
 MenuDescEsc := ""
-MenuDescKey6 := "Press {Caps Lock} + {^} to add exponent mark around selected text"
+MenuDescKey6 := "Press {Caps Lock} + {^} to add exponent mark around selected text. Converts selected text into superscripts if it consists of only numbers and xyzni."
 MenuDescCaps := "Press {Caps Lock} and another key simultaneously for special functions."
 MenuDescShift := "Press {Shift} + {Caps Lock} for the original Caps Lock functionality."
 MenuDescWin := "Press {Win} + {Caps Lock} to show interface"

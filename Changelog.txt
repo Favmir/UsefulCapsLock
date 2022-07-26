@@ -1,3 +1,6 @@
+2022/07/26	v1.5.0
+- Improved ^() key function (Now uses unicode superscripts if possible)
+
 2021/12/XX	v1.4.0
 - Improved ^() key function
 - Added Ctrl row to Gui
