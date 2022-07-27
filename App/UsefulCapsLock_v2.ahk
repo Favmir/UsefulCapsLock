@@ -8,6 +8,7 @@
 ;	If you want to use the original CapsLock function, press Shift + CapsLock
 ;	When mouse is disabled, press CapsLock + W to use Mouse.
 ;	(only happens when enabled in options)
+;	.ini files MUST be in Unicode 16! Unicode 8 doesn't work!
 ;==========================================
 #Requires AutoHotkey v2.0-beta
 
@@ -18,45 +19,75 @@ SendMode("Input")  ; Recommended for new scripts due to its superior speed and r
 SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 
 #Include %A_WorkingDir%\Settings\Localization.ahk
+#Include %A_WorkingDir%\KeyUnit.ahk
+#Include %A_WorkingDir%\Tray.ahk
 
-readKBSettings(){
-    ;[Scroll]
-    scrollUp := IniRead("\Settings\Gui.ini","Scroll", scrollUp)
-    scrollDown := IniRead("\Settings\Gui.ini","Scroll", scrollDown)
-    ;[Keybind]
-    keyGrave := IniRead("\Settings\Gui.ini","Keybind", keyGrave)
-    key1 := IniRead("\Settings\Gui.ini","Keybind", key1)
-    key2 := IniRead("\Settings\Gui.ini","Keybind", key2)
-    key3 := IniRead("\Settings\Gui.ini","Keybind", key3)
-    key4 := IniRead("\Settings\Gui.ini","Keybind", key4)
-    key5 := IniRead("\Settings\Gui.ini","Keybind", key5)
-    key7 := IniRead("\Settings\Gui.ini","Keybind", key7)
-    key8 := IniRead("\Settings\Gui.ini","Keybind", key8)
-    key9 := IniRead("\Settings\Gui.ini","Keybind", key9)
-    key0 := IniRead("\Settings\Gui.ini","Keybind", key0)
-    keyHyphen := IniRead("\Settings\Gui.ini","Keybind", keyHyphen)
-    keyEqual := IniRead("\Settings\Gui.ini","Keybind", keyEqual)
-    keyQ := IniRead("\Settings\Gui.ini","Keybind", keyQ)
-    keyT := IniRead("\Settings\Gui.ini","Keybind", keyT)
-    keyY := IniRead("\Settings\Gui.ini","Keybind", keyY)
-    keyP := ""
-    keyLBracket := IniRead("\Settings\Gui.ini","Keybind", keyLBracket)
-    keyRBracket := IniRead("\Settings\Gui.ini","Keybind", keyRBracket)
-    keyBSlash := IniRead("\Settings\Gui.ini","Keybind", keyBSlash)
-    keyA := ""
-    keyG := IniRead("\Settings\Gui.ini","Keybind", keyG)
-    keyQuote := IniRead("\Settings\Gui.ini","Keybind", keyQuote)
-    keyZ := IniRead("\Settings\Gui.ini","Keybind", keyZ)
-    keyX := IniRead("\Settings\Gui.ini","Keybind", keyX)
-    keyC := IniRead("\Settings\Gui.ini","Keybind", keyC)
-    keyV := IniRead("\Settings\Gui.ini","Keybind", keyV)
-    keyB := IniRead("\Settings\Gui.ini","Keybind", keyB)
-    keyN := IniRead("\Settings\Gui.ini","Keybind", keyN)
-    keyM := IniRead("\Settings\Gui.ini","Keybind", keyM)
-    keyComma := IniRead("\Settings\Gui.ini","Keybind", keyComma)
-    keyPeriod := IniRead("\Settings\Gui.ini","Keybind", keyPeriod)
-    keySlash := IniRead("\Settings\Gui.ini","Keybind", keySlash)
+
+;[Scroll]
+scrollSettings := KeySection(A_WorkingDir . "\Settings\Keys.ini", "Scroll")
+scrollSettings.addKey("scrollUp", &scrollUp)
+scrollSettings.addKey("scrollDown", &scrollDown)
+
+;[Keybind]
+keySettings := KeySection(A_WorkingDir . "\Settings\Keys.ini", "Keybind")
+keySettings.addKey("keyGrave", &keyGrave)
+keySettings.addKey("key1", &key1)
+keySettings.addKey("key2", &key2)
+keySettings.addKey("key3", &key3)
+keySettings.addKey("key4", &key4)
+keySettings.addKey("key5", &key5)
+keySettings.addKey("key7", &key7)
+keySettings.addKey("key8", &key8)
+keySettings.addKey("key9", &key9)
+keySettings.addKey("key0", &key0)
+keySettings.addKey("keyHyphen", &keyHyphen)
+keySettings.addKey("keyEqual", &keyEqual)
+keySettings.addKey("keyQ", &keyQ)
+keySettings.addKey("keyT", &keyT)
+keySettings.addKey("keyY", &keyY)
+keySettings.addKey("keyP", &keyP)
+keySettings.addKey("keyLBracket", &keyLBracket)
+keySettings.addKey("keyRBracket", &keyRBracket)
+keySettings.addKey("keyBSlash", &keyBSlash)
+keySettings.addKey("keyA", &keyA)
+keySettings.addKey("keyG", &keyG)
+keySettings.addKey("keyQuote", &keyQuote)
+keySettings.addKey("keyZ", &keyZ)
+keySettings.addKey("keyX", &keyX)
+keySettings.addKey("keyC", &keyC)
+keySettings.addKey("keyV", &keyV)
+keySettings.addKey("keyB", &keyB)
+keySettings.addKey("keyN", &keyN)
+keySettings.addKey("keyM", &keyM)
+keySettings.addKey("keyComma", &keyComma)
+keySettings.addKey("keyPeriod", &keyPeriod)
+keySettings.addKey("keySlash", &keySlash)
+
+;read settings
+;scrollSettings.readAll()
+
+;write settings
+;scrollSettings.writeAll()
+
+
+TraySetIcon(A_WorkingDir . "\Icons\icon(32x32).png",1,1)
+A_TrayMenu.Delete()
+A_TrayMenu.Add("Open Useful Caps Lock", ShowGui(),)
+A_TrayMenu.Add("Pause Program", TrayPause(),)
+A_TrayMenu.Add("Quit", TrayQuit(),)
+A_TrayMenu.Default := "Pause Program"
+A_TrayMenu.ClickCount := 1
+
+
+n::
+{
+	Send "nn"
 }
+
+
+
+/*
+
 
 
 
@@ -132,3 +163,4 @@ TrayQuit(A_ThisMenuItem, A_ThisMenuItemPos, MyMenu)
 { ; V1toV2: Added bracket
 	ExitApp()
 return
+*/

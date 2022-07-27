@@ -9,15 +9,11 @@ scrollDown := ""
 keyGrave := ""
 key1 := "o"
 
-readKBSettings(){
-    ;[Scroll]
-    scrollUp := IniRead("\Settings\Gui.ini","Scroll", scrollUp)
-    scrollDown := IniRead("\Settings\Gui.ini","Scroll", scrollDown)
-    ;[Keybind]
-    keyGrave := IniRead("\Settings\Gui.ini","Keybind", keyGrave)
-    key1 := IniRead("\Settings\Gui.ini","Keybind", key1)
-}
 
+for (key)
+    key := IniRead("\Settings\Gui.ini",section, key)
+
+}
 
 readKBSettings()
 MsgBox(key1,"","")
