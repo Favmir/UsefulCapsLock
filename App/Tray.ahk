@@ -1,4 +1,4 @@
-class ShowGui{
+class TrayShowGui{
 	Call(A_ThisMenuItem, A_ThisMenuItemPos, MyMenu){
 		MsgBox("SHOW GUI",,)
 	}

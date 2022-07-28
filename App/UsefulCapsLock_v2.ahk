@@ -21,7 +21,15 @@ SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 #Include %A_WorkingDir%\Settings\Localization.ahk
 #Include %A_WorkingDir%\KeyUnit.ahk
 #Include %A_WorkingDir%\Tray.ahk
+#Include %A_WorkingDir%\KeyboardGui.ahk
 
+
+btnLayout := [
+	[]
+	[]
+	[]
+	[]
+]
 
 ;[Scroll]
 scrollSettings := KeySection(A_WorkingDir . "\Settings\Keys.ini", "Scroll")
@@ -63,6 +71,26 @@ keySettings.addKey("keyComma", &keyComma)
 keySettings.addKey("keyPeriod", &keyPeriod)
 keySettings.addKey("keySlash", &keySlash)
 
+
+
+guiSettings := KeySection(A_WorkingDir . "\Settings\Gui.ini", "Layout")
+guiSettings.addKey("lG", &lG)				;Gap between keys
+guiSettings.addKey("lW", &lW)				;Width of regular key
+guiSettings.addKey("lH", &lH)				;Height of regular key
+guiSettings.addKey("lWBSpc", &lWBSpc)			;Backspace Width: determines the total Keyboard width(13×lW + 15×lG + lWBSpc). Has to be bigger than (lWTab - lW).
+guiSettings.addKey("lWTab", &lWTab)			;Tab Width
+guiSettings.addKey("lWCaps", &lWCaps)			;Caps Lock Width
+guiSettings.addKey("lWShift", &lWShift)			;Left Shift Width
+guiSettings.addKey("lWCtrl", &lWCtrl)			;Left Ctrl(and other function keys like Windows) Width
+
+guiSettings.readAll()
+
+
+
+mainGui := KeyboardGui("+AlwaysOnTop -Caption", "Useful Caps Lock v2", "")
+maiGui.setTheme()
+mainGui.buildKeyboard(lG, lW, lH, lWBSpc, lWTab, lWCaps, lWShift, lWCtrl)
+
 ;read settings
 ;scrollSettings.readAll()
 
@@ -72,7 +100,7 @@ keySettings.addKey("keySlash", &keySlash)
 
 TraySetIcon(A_WorkingDir . "\Icons\icon(32x32).png",1,1)
 A_TrayMenu.Delete()
-A_TrayMenu.Add("Open Useful Caps Lock", ShowGui(),)
+A_TrayMenu.Add("Open Useful Caps Lock", TrayShowGui(),)
 A_TrayMenu.Add("Pause Program", TrayPause(),)
 A_TrayMenu.Add("Quit", TrayQuit(),)
 A_TrayMenu.Default := "Pause Program"
