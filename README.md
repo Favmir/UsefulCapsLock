@@ -1,7 +1,7 @@
 # UsefulCapsLock
 ![Gui](/Desc.jpg)
 
-A horribly written AutoHotKey Script that helps you edit documents.
+An AutoHotKey Script that helps you edit text.
 
 I made this script to solve my problem of
 1. palm grazing my laptop touchpad constantly
@@ -27,10 +27,10 @@ Well, this is a portable program, so you don't need to 'install' this per se.
 I've left this script running while playing games, and so far had no problem at all with single-player games.
 
 I've only tested a few multiplayer games:
-* Monster Hunter World - No problem (although Monster Hunter doesn't ban cheaters at all because they don't have paid lootboxes)
-* Overwatch - Doesn't detect this as a cheating software.
-* Team Fortress 2 - No problem
-* Lost Ark(MMORPG) - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game
+* Monster Hunter World/Rise - Hotkeys don't work on text boxes for some reason. No negative consequences(Monster Hunter doesn't ban cheats at all anyways).
+* Overwatch - Works. Doesn't detect this as a cheating software.
+* Team Fortress 2 - No problem.
+* Lost Ark(MMORPG) - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game.
 
 ## To Do List
 - [ ] Rewrite this botched mess of a code in AHK v2

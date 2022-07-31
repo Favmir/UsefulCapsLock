@@ -18,25 +18,30 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
 
+#include %A_ScriptDir%\Settings\Localization.ucl
+
 ;============ Add Tray ============
 Menu, Tray, Icon,,, 1	;freeze current icon
 Menu, Tray, Icon, %A_ScriptDir%\Icons\icon(32x32).png, 1, 1
 Menu, Tray, NoStandard
 Menu, Tray, Click, 1
-Menu, Tray, Add, &Open Useful Caps Lock, TrayGui
-Menu, Tray, Add, &Pause Program, TrayPause
-Menu, Tray, Add, &Quit, TrayQuit
-Menu, Tray, Default, &Pause Program
+Menu, Tray, Add, %TrayMenuOpen%, TrayGui
+Menu, Tray, Add, %TrayMenuPause%, TrayPause
+Menu, Tray, Add, %TrayMenuQuit%, TrayQuit
+Menu, Tray, Default, %TrayMenuPause%
 
 
-#include %A_ScriptDir%\Settings\Localization.ucl
+
 
 ;=========================== Initialize
 isWelcomeDone := false
 #include %A_ScriptDir%\Settings\NoStartPop.ucl
+
+
 if(NoStartPop == 0)
 {
 	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
+	ControlSetText, Button2, Never Show
 	ifMsgBox, Cancel
 	{
 		FileDelete %A_ScriptDir%\Settings\NoStartPop.ucl
@@ -46,6 +51,31 @@ if(NoStartPop == 0)
 		), %A_ScriptDir%\Settings\NoStartPop.ucl, UTF-8
 	}
 }
+
+/*
+Gui, WelcomeWin:New, +AlwaysOnTop -Sysmenu, %PopTitleWelcome%
+Gui, Font, s12, Segoe UI
+Gui, Add, Text,, %PopDescWelcome%
+Gui, Font, s15 Bold, Segoe UI
+Gui, Add, Button, Center gWelcomeCheck, %PopButtonWelcomeOK%
+Gui, Add, Checkbox, Center vNeverShow, %PopButtonWelcomeNever%
+if(NoStartPop == 0){
+	Gui, WelcomeWin:Show
+}
+
+WelcomeCheck:
+	if(NeverShow == 1)
+	{
+		FileDelete %A_ScriptDir%\Settings\NoStartPop.ucl
+		FileAppend, 
+		(
+		NoStartPop := 1
+		), %A_ScriptDir%\Settings\NoStartPop.ucl, UTF-8
+	}
+	Gui, WelcomeWin:Destroy
+return
+*/
+
 isWelcomeDone := true
 EnableHK := false
 SetCapsLockState Off
@@ -70,7 +100,7 @@ TrayGui:
 return
 
 TrayPause:
-Menu, Tray, ToggleCheck, &Pause Program
+Menu, Tray, ToggleCheck, %TrayMenuPause%
 if A_IsSuspended=1 
 {
 	Suspend Off

@@ -1,5 +1,7 @@
 2022/07/31	v1.5.1
 - Improved Touchpad Lock tutorial window(no longer can be closed with keyboard)
+- Can now assign Tab characters on a key
+- Added localization functionality for tray menu
 
 2022/07/26	v1.5.0
 - Improved ^() key function (Now uses unicode superscripts if possible)
