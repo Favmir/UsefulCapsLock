@@ -6,9 +6,11 @@
 ;	upon pressing it you enter a special input mode.
 ;	Press Windows/Alt + CapsLock to bring up the menu.
 ;	If you want to use the original CapsLock function, press Shift + CapsLock
-;	When mouse is disabled, press CapsLock + W to use Mouse.
-;	(only happens when enabled in options)
+;	When touchpad lock is activated, press CapsLock + W to use re-enable mouse.
+;	(Only applies when enabled in options)
 ;==========================================
+
+#Requires AutoHotkey v1.1
 #SingleInstance Force
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
@@ -281,7 +283,27 @@ else{
 	LockMouse := true
 	DisableMouse := true
 	BlockInput, MouseMove
-	MsgBox, 4096, %PopTitleMouseLock%, %PopDescMouseLock%
+	Gui, MLWin:New, +AlwaysOnTop -Sysmenu, %PopTitleMouseLock%
+	Gui, Font, s12, Segoe UI
+	Gui, Add, Text,, %PopDescMouseLock%
+	Gui, Font, s15 Bold, Segoe UI
+	Gui, Add, Button, Center, %PopButtonMouseLock%
+	Gui, Show
+	mousegetpos, sx, sy
+	settimer, MouseMoveCheck, 250
+}
+return
+
+MouseMoveCheck:
+mousegetpos, cx, cy
+if (cx != sx or cy != sy)
+{
+  ; mouse has moved, calculate by how much
+  if (cx > (sx+50) or cx < (sx-50) or cy > (sy+50) or cy < (sy-50))
+  {
+	Gui, MLWin:Destroy
+	SetTimer , MouseMoveCheck, Delete,
+  }  
 }
 return
 
@@ -304,6 +326,7 @@ RButton::return
 BlockInput, MouseMove
 return
 
+/*
 #If EnableSuper
 `::Send ≈
 1::Send ¹
@@ -352,6 +375,7 @@ m::Send ∑
 ,::Send ≤
 .::Send ≥
 /::Send ÷
+*/
 
 #If EnableHK
 w::
@@ -361,12 +385,14 @@ if LockMouse{
 }
 return
 
+/*
 Up::
 EnableSuper := true
 return
 Down::
 EnableSuper := false
 return
+*/
 
 6::
 Clipsaved := ClipboardAll
@@ -393,6 +419,10 @@ if(RegExMatch(Clipboard, "[^0-9+\-\(\)=ni]") == 0){ ;can be superscriptified ⁰
 	Clipboard := StrReplace(Clipboard, "n", "ⁿ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "i", "ⁱ",, Limit := -1)
 	;ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ
+	Clipboard := StrReplace(Clipboard, "j", "ʲ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "k", "ᵏ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "l", "ˡ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "m", "ᵐ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "x", "ˣ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "y", "ʸ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "z", "ᶻ",, Limit := -1)
@@ -409,16 +439,6 @@ if(RegExMatch(Clipboard, "[^0-9+\-\(\)=ni]") == 0){ ;can be superscriptified ⁰
 Clipboard := Clipsaved
 Clipsaved := ""	;free up memory
 return
-;=== commented out buggy version ==
-;6::
-;Clipsaved := ClipboardAll
-;Clipboard := ""
-;Send ^{c}
-;Clipwait
-;Clipboard := "^(" Clipboard ")"
-;SendRaw %Clipboard%
-;Clipboard := Clipsaved
-;return
 
 ; Navigate: Press CapsLock and these keys to navigate without moving your hands.
 i::Send {Up}
@@ -435,7 +455,7 @@ h::Send {Home}
 `;::Send {End}
 
 
-; Selection: Pressing 's' while pressing CapsLock acts as selection key(what shift key does normally). 
+; Selection: Pressing either 'Shift' or 's' while pressing CapsLock acts as selection key(what shift key does normally). 
 s & i::Send +{Up}
 s & j::Send +{Left}
 s & k::Send +{Down}
@@ -446,6 +466,17 @@ s & u::Send +^{Left}
 s & o::Send +^{Right}
 s & h::Send +{Home}
 s & `;::Send +{End}
+
++i::Send +{Up}
++j::Send +{Left}
++k::Send +{Down}
++l::Send +{Right}
++r::Send +{Up %UpScroll%}
++f::Send +{Down %DownScroll%}
++u::Send +^{Left}
++o::Send +^{Right}
++h::Send +{Home}
++`;::Send +{End}
 
 
 ; Custom Keybinds

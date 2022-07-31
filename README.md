@@ -27,5 +27,5 @@ I've only tested a few multiplayer games:
 * Lost Ark(MMORPG) - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game
 
 ## To Do List
-- [ ] Rewrite this botched mess of a code
+- [ ] Rewrite this botched mess of a code in AHK v2
 - [ ] Add Unicode character browser
