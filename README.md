@@ -10,12 +10,18 @@ I made this script to solve my problem of
 
 Some people solve these problems via a Pointing Stick(a.k.a. red nipple) but I prefer my solution.
 
+## Installation
+Well, you don't need to 'install' this per se, but:
+* You can run the program either by running `Launch Useful Caps Lock.bat` or 'UsefulCapsLock.ahk'.
+* Run `Add to Startup Menu.lnk` to make this script automatically run on reboot.
+* If you don't want it on your computer anymore, use `Open Startup Menu.lnk` to go to startup menu and remove the shortcut.
+
 ## How to Use
-* [Windows + Caps Lock] brings out the GUI menu above. 
-* [Caps Lock + white key] sends the allocated text.
-* [Caps Lock + grayed out key] carries out pre-determined functions. You can see which key exactly does what by clicking on the keys.
-* [Mouse Lock] checkbox disables mouse input and only re-enables it when you press [Caps Lock + W], so you won’t have to suffer from Touchpad palm press syndrome anymore.
-* [Shift + Caps Lock] carries out the original Caps Lock function
+* `[Windows + Caps Lock` brings out the GUI menu above. 
+* `[Caps Lock + white key]` sends the allocated text.
+* `[Caps Lock + grayed out key]` carries out pre-determined functions. You can see which key exactly does what by clicking on the keys.
+* `[Mouse Lock]` checkbox disables mouse input and only re-enables it when you press `[Caps Lock + W]`, so you won’t have to suffer from Touchpad palm press syndrome anymore.
+* `[Shift + Caps Lock]` carries out the original Caps Lock function
 
 ## Issues (with games)
 I've left this script running while playing games, and so far had no problem at all with single-player games.
