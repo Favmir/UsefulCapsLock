@@ -32,6 +32,9 @@ I've only tested a few multiplayer games:
 * Team Fortress 2 - No problem.
 * Lost Ark(MMORPG) - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game.
 
+## Changelog
+[Open Changelog](Changelog.txt}
+
 ## To Do List
 - [ ] Rewrite this botched mess of a code in AHK v2
 - [ ] Add Unicode character browser
