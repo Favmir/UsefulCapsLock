@@ -19,7 +19,7 @@ class KeySection {
 	}
 
 	getKey(index){
-		;return this.keyList.get(index)
+		return this.keyList.get(index)
 	}
 
 	readAll(){
@@ -45,8 +45,8 @@ class KeySection {
 
 class KeyUnit {
 	btnType := ""
-	btnWidth := 10
-	btnHeight := 5
+	btnWidth := ""
+	btnHeight := ""
 	btnDesc := ""
 	btnEvent := ""
 
@@ -62,6 +62,14 @@ class KeyUnit {
 		this.keyVarPointer := keyVarPointer
 	}
 
+	setGuiProperty(keyType, width, height, desc, event){
+		this.btnType := keyType
+		this.btnWidth := width
+		this.btnHeight := height
+		this.btnDesc := desc
+		this.btnEvent := event
+	}
+
 	read(){
 		%this.keyVarPointer% := IniRead(this.iniPath, this.iniSection, this.iniKey)
 	}
@@ -69,4 +77,6 @@ class KeyUnit {
 	write(){
 		IniWrite(%this.keyVarPointer%, this.iniPath, this.iniSection, this.iniKey)
 	}
+
+
 }
