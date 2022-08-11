@@ -124,11 +124,15 @@ DescKey6:
 return
 
 DescCaps:
-	MsgBox, 4096,%MenuTitleKeys%, %MenuDescCaps%,
+	MsgBox, 4096, %MenuTitleKeys%, %MenuDescCaps%,
 return
 
 DescShift:
-	MsgBox, 4096,%MenuTitleKeys%, %MenuDescShift%,
+	MsgBox, 4096, %MenuTitleKeys%, %MenuDescShift%,
+return
+
+DescLCtrl:
+	MsgBox, 4096, %MenuTitleKeys%, %MenuDescLCtrl%,
 return
 
 DescWin:
@@ -428,7 +432,7 @@ m::Send ∑
 ~p::Gosub KeyPressed
 ~q::Gosub KeyPressed
 ~r::Gosub KeyPressed
-~s::Gosub KeyPressed
+
 ~t::Gosub KeyPressed
 ~u::Gosub KeyPressed
 ~v::Gosub KeyPressed
@@ -457,6 +461,7 @@ m::Send ∑
 ~-::Gosub KeyPressed
 ~=::Gosub KeyPressed
 ~\::Gosub KeyPressed
+
 
 KeyPressed:
 if LockMouse{

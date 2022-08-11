@@ -87,7 +87,7 @@ Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyPeriod +WantT
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeySlash +WantTab, %KeySlash%
 Gui Add, Button, xp+%LayoutWG% yp w%LayoutWRShift% hp -VScroll +Center gDescShift +ReadOnly, ⇧ RShift
 ;======== Ctrl Row
-Gui Add, Edit, x%LayoutG% yp+%LayoutHG% w%LayoutWCtrl% hp -VScroll +Center +ReadOnly, LCtrl
+Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWCtrl% hp -VScroll +Center gDescLCtrl +ReadOnly, LCtrl
 Gui Add, Button, xp+%LayoutWCtrlG% yp wp hp -VScroll +Center gDescWin +ReadOnly, Win
 Gui Add, Button, xp+%LayoutWCtrlG% yp wp hp -VScroll +Center gDescLAlt +ReadOnly, LAlt
 Gui Add, Edit, xp+%LayoutWCtrlG% yp w%LayoutWSpace% hp -VScroll +Center +ReadOnly, Space
