@@ -493,7 +493,7 @@ Clipsaved := ClipboardAll
 Clipboard := ""
 Send ^{x}
 ClipWait, 1
-if(RegExMatch(Clipboard, "[^0-9+\-\(\)=ni]") == 0){ ;can be superscriptified ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
+if(RegExMatch(Clipboard, "[^0-9+\-\(\)=nijklmxyz]") == 0){ ;can be superscriptified ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
 	;Msgbox, "Can be superscriptized" + %Clipboard%
 	Clipboard := StrReplace(Clipboard, "0", "⁰",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "1", "¹",, Limit := -1)
