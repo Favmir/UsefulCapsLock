@@ -338,6 +338,8 @@ if (cx != sx or cy != sy)
 return
 
 ;=============== Main Fucntionality
+
+
 CapsLock::
 EnableHK := true
 if LockMouse{
@@ -406,6 +408,63 @@ m::Send ∑
 .::Send ≥
 /::Send ÷
 */
+
+#If !EnableHK
+~a::Gosub KeyPressed
+~b::Gosub KeyPressed
+~c::Gosub KeyPressed
+~d::Gosub KeyPressed
+~e::Gosub KeyPressed
+~f::Gosub KeyPressed
+~g::Gosub KeyPressed
+~h::Gosub KeyPressed
+~i::Gosub KeyPressed
+~j::Gosub KeyPressed
+~k::Gosub KeyPressed
+~l::Gosub KeyPressed
+~m::Gosub KeyPressed
+~n::Gosub KeyPressed
+~o::Gosub KeyPressed
+~p::Gosub KeyPressed
+~q::Gosub KeyPressed
+~r::Gosub KeyPressed
+~s::Gosub KeyPressed
+~t::Gosub KeyPressed
+~u::Gosub KeyPressed
+~v::Gosub KeyPressed
+~w::Gosub KeyPressed
+~x::Gosub KeyPressed
+~y::Gosub KeyPressed
+~z::Gosub KeyPressed
+~,::Gosub KeyPressed
+~.::Gosub KeyPressed
+~/::Gosub KeyPressed
+~`;::Gosub KeyPressed
+~'::Gosub KeyPressed
+~[::Gosub KeyPressed
+~]::Gosub KeyPressed
+~`::Gosub KeyPressed
+~1::Gosub KeyPressed
+~2::Gosub KeyPressed
+~3::Gosub KeyPressed
+~4::Gosub KeyPressed
+~5::Gosub KeyPressed
+~6::Gosub KeyPressed
+~7::Gosub KeyPressed
+~8::Gosub KeyPressed
+~9::Gosub KeyPressed
+~0::Gosub KeyPressed
+~-::Gosub KeyPressed
+~=::Gosub KeyPressed
+~\::Gosub KeyPressed
+
+KeyPressed:
+if LockMouse{
+	DisableMouse := true
+	BlockInput, MouseMove
+}
+Return
+
 
 #If EnableHK
 w::

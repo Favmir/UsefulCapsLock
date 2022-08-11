@@ -12,10 +12,10 @@ MenuDescFront := "Press Caps Lock and another key simultaneously to use.`nTo cus
 MenuDescFront2 := "Win + Caps Lock`nShow interface"
 
 MenuTitleAbout := "About"
-MenuDescAbout := "Useful CapsLock v1.5.1`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
+MenuDescAbout := "Useful CapsLock v1.5.2`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
 
 PopTitleMouseLock := "Touchpad lock activated"
-PopDescMouseLock := "No more Touchpad palm presses!`n`nPressing {CapsLock} disables mouse input.`n`nPress {CapsLock + W} to use mouse again."
+PopDescMouseLock := "No more Touchpad palm presses!`n`nTyping disables mouse input.`n`nPress {CapsLock + W} to use mouse again."
 PopButtonMouseLock := "Move Cursor to Continue..."
 
 MenuTitleSpecialChars := "Special characters list"

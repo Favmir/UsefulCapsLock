@@ -1,3 +1,6 @@
+2022/08/11	v1.5.2
+- When Mouse Lock is enabled, typing in general disables mouse(instead of only Caps Lock)
+
 2022/07/31	v1.5.1
 - Improved Touchpad Lock tutorial window(no longer can be closed with keyboard)
 - Can now assign Tab characters on a key
