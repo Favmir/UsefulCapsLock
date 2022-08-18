@@ -9,8 +9,9 @@
 ;	When touchpad lock is activated, press CapsLock + W to use re-enable mouse.
 ;	(Only applies when enabled in options)
 ;==========================================
-
 #Requires AutoHotkey v1.1
+
+#MaxHotkeysPerInterval, 200	; Default is 70, which triggers warning when mouse scroll lock is activated and you scroll aggresively
 #SingleInstance Force
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
@@ -360,6 +361,8 @@ return
 LButton::return
 RButton::return
 BlockInput, MouseMove
+WheelUp::Return
+WheelDown::Return
 return
 
 /*

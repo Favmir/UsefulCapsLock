@@ -1,3 +1,6 @@
+2022/08/18	v1.5.3
+- Mouse Lock also disables mouse scrolling.
+
 2022/08/11	v1.5.2
 - When Mouse Lock is enabled, typing in general disables mouse(instead of only Caps Lock)
 
@@ -15,7 +18,7 @@
 - Added Ctrl row to Gui
 
 2021/10/03	v1.3.1
-- Fixed new bug introduced in recent Windows update
+- Fixed new bug introduced in recent Windows updateo
 - Added option to disable startup popup message box
 
 2020/09/XX	v1.1.6
