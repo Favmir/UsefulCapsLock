@@ -19,6 +19,8 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
 
+;KeyHistory
+
 #include %A_ScriptDir%\Settings\Localization.ucl
 
 ;============ Add Tray ============
@@ -344,7 +346,6 @@ return
 
 ;=============== Main Fucntionality
 
-
 CapsLock::
 EnableHK := true
 if LockMouse{
@@ -356,13 +357,35 @@ return
 CapsLock Up::
 EnableHK := false
 return
+/*
+SHIFT+F1=F13
+SHIFT+F2=F14
+SHIFT+F3=F15
+SHIFT+F4=f16
+SHIFT+F5=F17
+SHIFT+F6=F18
+SHIFT+F7=F19
+SHIFT+F8=F20
+SHIFT+F9=F21
+SHIFT+F10=F22
+SHIFT+F11=F23
+SHIFT+F12=F24
+*/
 
-#If DisableMouse
-LButton::return
-RButton::return
+#If DisableMouse	;Synaptics Clickpad driver's vertical scroll is undetectable by AHK
+*LButton::return
+*RButton::return
 BlockInput, MouseMove
-WheelUp::Return
-WheelDown::Return
+*WheelUp::Return
+*WheelDown::Return
+*Wheelleft::Return
+*Wheelright::Return
+*MButton::Return
+*NumpadLeft::Return	;Synaptics Clickpad driver uses NumpadLeft and NumpadRight for horizontal scroll
+*NumpadRight::Return
+*NumpadUp::Return
+*NumpadDown::Return
+	;Synaptics Clickpad driver uses LCtrl + undetectable vertical scroll for pinch zoom
 return
 
 /*
