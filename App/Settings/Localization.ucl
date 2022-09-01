@@ -4,15 +4,17 @@ PopDescWelcome := "Press`n[Win]+[CapsLock]`nor`n[Alt]+[CapsLock]`nto open menu.`
 PopButtonWelcomeOK := "Alright"
 PopButtonWelcomeNever := "Don't Show Again"
 
-TrayMenuOpen := "Open Useful Caps Lock"
+AppTitle := "Useful Caps Lock"
+
+TrayMenuOpen := "Settings (LAlt + Caps Lock)"
 TrayMenuPause := "Disable (Click Icon)"
 TrayMenuQuit := "Quit"
 
 MenuDescFront := "Press Caps Lock and another key simultaneously to use.`nTo customize, type in desired characters into the field."
-MenuDescFront2 := "Win + Caps Lock`nShow interface"
+MenuDescFront2 := "Alt + Caps Lock`nShow interface"
 
 MenuTitleAbout := "About"
-MenuDescAbout := "Useful CapsLock v1.5.3`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without moving your arms.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
+MenuDescAbout := "Useful CapsLock v1.5.4`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without reaching for arrow keys.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
 
 PopTitleMouseLock := "Touchpad lock activated"
 PopDescMouseLock := "No more Touchpad palm presses!`n`nTyping disables mouse input.`n`nPress {CapsLock + W} to use mouse again."
@@ -30,7 +32,7 @@ MenuDescLCtrl := "Press {LCtrl} + {Caps Lock} to toggle Caps Lock."
 MenuDescWin := "Press {Win} + {Caps Lock} to show interface"
 MenuDescLAlt := "Press {LAlt} + {Caps Lock} to show interface"
 MenuDescMLock := "When Mouse Lock is enabled, using mouse requires the press of {Caps Lock} + {W}"
-MenuDescSelect := "Press {Caps Lock} + {S} + {I/J/K/L} to select blocks of text."
+MenuDescSelect := "Press {Caps Lock} + {S} + {I/J/K/L} to select text."
 MenuDescPanUp := "Press {Caps Lock} + {E/D} to send {Ctrl} + {Up/Down}"
 MenuDescPanDn := MenuDescPanUp
 MenuDescScrollUp := "Press {Caps Lock} + {R/F} to move cusror up and down. You can adjust the amount of rows."

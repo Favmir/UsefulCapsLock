@@ -28,6 +28,8 @@ Menu, Tray, Icon,,, 1	;freeze current icon
 Menu, Tray, Icon, %A_ScriptDir%\Icons\icon(32x32).png, 1, 1
 Menu, Tray, NoStandard
 Menu, Tray, Click, 1
+Menu, Tray, Add, %AppTitle%, TrayTitle
+Menu, Tray, Disable, %AppTitle%
 Menu, Tray, Add, %TrayMenuOpen%, TrayGui
 Menu, Tray, Add, %TrayMenuPause%, TrayPause
 Menu, Tray, Add, %TrayMenuQuit%, TrayQuit
@@ -54,6 +56,7 @@ if(NoStartPop == 0)
 		), %A_ScriptDir%\Settings\NoStartPop.ucl, UTF-8
 	}
 }
+
 
 /*
 Gui, WelcomeWin:New, +AlwaysOnTop -Sysmenu, %PopTitleWelcome%
@@ -90,8 +93,11 @@ EnableSuper := false
 #include %A_ScriptDir%\Scripts\BuildMainGui.ahk
 
 Gui -SysMenu
-Gui, Show, w%LayoutTotalW% h%LayoutTotalH% Hide, Useful Caps Lock
+Gui, Show, w%LayoutTotalW% h%LayoutTotalH% Hide, %AppTitle%
+GuiHidden := 1
+return
 
+TrayTitle:
 return
 
 TrayGui:
@@ -112,7 +118,7 @@ if A_IsSuspended=1
 else
 {
 	Menu, Tray, Icon, %A_ScriptDir%\Icons\icon_off(32x32).png, 1, 1
-	Gui Show, Hide, Useful Caps Lock
+	Gui Show, Hide, %AppTitle%
 	Suspend On
 }
 return
@@ -198,7 +204,7 @@ GuiSave:
 return
 
 GuiCancel:
-	Gui Show, Hide, Useful Caps Lock
+	Gui Show, Hide, %AppTitle%
 	GoSub GuiRefresh
 return
 
@@ -296,15 +302,26 @@ GuiQuit:
 	GoSub TrayQuit
 return
 
-;======== Pressing Hotkeys(Win+Caps) to show main menu.
+;======== Pressing Hotkeys(Alt/Win+Caps) to show main menu.
 !CapsLock::
 #CapsLock::
 GuiOpen:
-if isWelcomeDone
+if isWelcomeDone ;Make sure GUI doesn't appear before Welcome Msgbox is gone
 {
 	DisableMouse := false
 	BlockInput, MouseMoveOff
-	Gui, Show,, Useful Caps Lock
+	GoSub ToggleGui
+}
+return
+
+Esc::
+ToggleGui:
+if(GuiHidden){
+	Gui, Show,, %AppTitle%
+	GuiHidden = 0
+}Else{
+	Gui, Show,Hide,
+	GuiHidden = 1
 }
 return
 
