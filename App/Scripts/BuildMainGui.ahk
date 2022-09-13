@@ -6,27 +6,32 @@ LayoutWRShift := LayoutWBSpc + LayoutW + LayoutW + LayoutW - LayoutWShift + Layo
 LayoutWG := LayoutW + LayoutG
 LayoutHG := LayoutH + LayoutG
 LayoutWTabG := LayoutWTab + LayoutG
+LayoutWBSlshG := LayoutWBSlsh + LayoutG
 LayoutWCapsG :=  LayoutWCaps + LayoutG
+LayoutWEnterG := LayoutWEnter + LayoutG
 LayoutWShiftG := LayoutWShift + LayoutG
+LayoutWRShiftG := LayoutWRShift + LayoutG
 LayoutWCtrlG := LayoutWCtrl + LayoutG
 
-LayoutTotalW := LayoutG + LayoutWG * 13 + LayoutWBSpc + LayoutG
+LayoutTotalW := LayoutG + LayoutWG * 16 + LayoutWBSpc + LayoutG
 LayoutTotalH := LayoutHG * 7 + LayoutG
 
-LayoutWSpace := LayoutTotalW - LayoutWCtrlG * 7 - LayoutG * 2
+LayoutWSpace := LayoutTotalW - LayoutWCtrlG * 7 - LayoutG*2 - LayoutWG*3
 LayoutWSpaceG := LayoutWSpace + LayoutG
+
 
 Gui, Color, %ColorBG%
 ;======== Esc Row
 Gui Font, s11 Bold, Segoe UI
 Gui Add, Button, x%LayoutG% y%LayoutG% w%LayoutW% h%LayoutH% -VScroll +Center +ReadOnly, Esc			;Esc
-Gui Add, Edit, xp+%LayoutWG% yp w500 hp -VScroll +Center +ReadOnly, %MenuDescFront%
+Gui Add, Edit, xp+%LayoutWG% yp w600 hp -VScroll +Center +ReadOnly, %MenuDescFront%
 Temp := LayoutTotalW - LayoutWTab - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWTab% hp -VScroll +Center gGuiAbout, About
 Temp := Temp - LayoutWTab - LayoutG
 Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center gGuiMLock, Mouse Lock
-Temp := Temp - 140 - LayoutG
-Gui Add, Edit, x%Temp% yp w140 hp -VScroll +Center +ReadOnly, %MenuDescFront2%
+Temp := (Temp - 600 - LayoutWG - LayoutG*3)
+Temp2 := LayoutWG + 600 + LayoutG*2
+Gui Add, Edit, x%Temp2% yp w%Temp% hp -VScroll +Center +ReadOnly, %MenuDescFront2%
 ;======== Number Row
 Gui Add, Edit, WantTab x%LayoutG% yp+%LayoutHG% w%LayoutW% h%LayoutH% -VScroll +Center vKeyGrave +WantTab, %KeyGrave%
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKey1 +WantTab, %Key1%
@@ -58,6 +63,11 @@ Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyP +WantTab, %
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyLBracket +WantTab, %KeyLBracket%					;[
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyRBracket +WantTab, %KeyRBracket%					;]
 Gui Add, Edit, WantTab xp+%LayoutWG% yp w%LayoutWBSlsh% hp -VScroll +Center vKeyBSlash +WantTab, %KeyBSlash%			;\
+
+Gui Add, Edit,WantTab xp+%LayoutWBSlshG% yp w%LayoutW% hp -VScroll +Center vKeyNumpad7 +WantTab, %KeyNumpad7%
+Gui Add, Edit,WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad8 +WantTab, %KeyNumpad8%
+Gui Add, Edit,WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad9 +WantTab, %KeyNumpad9%
+
 ;======== Caps Lock Row
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWCaps% hp -VScroll +Center gDescCaps +ReadOnly cRed, Special	;Caps Lock
 Gui Add, Edit, WantTab xp+%LayoutWCapsG% yp w%LayoutW% hp -VScroll +Center vKeyA +WantTab, %KeyA%					;A
@@ -73,6 +83,10 @@ Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescRight +ReadOnly, �
 Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescEnd +ReadOnly, End					;Colon
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyQuote +WantTab, %KeyQuote%						;Quotes
 Gui Add, Edit, xp+%LayoutWG% yp w%LayoutWEnter% hp -VScroll +Center +ReadOnly, ↵ Enter				;Return key
+
+Gui Add, Edit,WantTab xp+%LayoutWEnterG% yp w%LayoutW% hp -VScroll +Center vKeyNumpad4 +WantTab, %KeyNumpad4%
+Gui Add, Edit,WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad5 +WantTab, %KeyNumpad5%
+Gui Add, Edit,WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad6 +WantTab, %KeyNumpad6%
 ;======== Shift Row
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWShift% hp -VScroll +Center gDescShift +ReadOnly, LShift ⇧
 Gui Add, Edit, WantTab xp+%LayoutWShiftG% yp w%LayoutW% hp -VScroll +Center vKeyZ +WantTab, %KeyZ%
@@ -86,6 +100,10 @@ Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyComma +WantTa
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyPeriod +WantTab, %KeyPeriod%
 Gui Add, Edit, WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeySlash +WantTab, %KeySlash%
 Gui Add, Button, xp+%LayoutWG% yp w%LayoutWRShift% hp -VScroll +Center gDescShift +ReadOnly, ⇧ RShift
+
+Gui Add, Edit,WantTab xp+%LayoutWRShiftG% yp w%LayoutW% hp -VScroll +Center vKeyNumpad1 +WantTab, %KeyNumpad1%
+Gui Add, Edit,WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad2 +WantTab, %KeyNumpad2%
+Gui Add, Edit,WantTab xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad3 +WantTab, %KeyNumpad3%
 ;======== Ctrl Row
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWCtrl% hp -VScroll +Center gDescLCtrl +ReadOnly, LCtrl
 Gui Add, Button, xp+%LayoutWCtrlG% yp wp hp -VScroll +Center gDescWin +ReadOnly, Win

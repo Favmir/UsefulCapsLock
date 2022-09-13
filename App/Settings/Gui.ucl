@@ -8,6 +8,6 @@ LayoutWCaps := 98			;Caps Lock Width
 LayoutWShift := 128			;Left Shift Width
 LayoutWCtrl := 62			;Left Ctrl(and other function keys like Windows) Width
 
-ColorBG := "EEEEEE"			;Background Color
-;ColorButton := "999999"		;not used
+ColorBG := "EEEEE9"			;Background Color
+;ColorBtn := "F0F0EF"		;not used
 ;ColorStop := "FF8888"		;not used

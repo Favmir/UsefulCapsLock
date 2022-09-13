@@ -42,7 +42,6 @@ Menu, Tray, Default, %TrayMenuPause%
 isWelcomeDone := false
 #include %A_ScriptDir%\Settings\NoStartPop.ucl
 
-
 if(NoStartPop == 0)
 {
 	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
@@ -243,6 +242,15 @@ GuiRefresh:
 	GuiControl,, KeyComma, %KeyComma%
 	GuiControl,, KeyPeriod, %KeyPeriod%
 	GuiControl,, KeySlash, %KeySlash%
+	GuiControl,, KeyNumpad1, %KeyNumpad1%
+	GuiControl,, KeyNumpad2, %KeyNumpad2%
+	GuiControl,, KeyNumpad3, %KeyNumpad3%
+	GuiControl,, KeyNumpad4, %KeyNumpad4%
+	GuiControl,, KeyNumpad5, %KeyNumpad5%
+	GuiControl,, KeyNumpad6, %KeyNumpad6%
+	GuiControl,, KeyNumpad7, %KeyNumpad7%
+	GuiControl,, KeyNumpad8, %KeyNumpad8%
+	GuiControl,, KeyNumpad9, %KeyNumpad9%
 return
 
 ReadSettings:
@@ -291,6 +299,15 @@ KeyM = %KeyM%
 KeyComma = %KeyComma%
 KeyPeriod = %KeyPeriod%
 KeySlash = %KeySlash%
+KeyNumpad1 = %KeyNumpad1%
+KeyNumpad2 = %KeyNumpad2%
+KeyNumpad3 = %KeyNumpad3%
+KeyNumpad4 = %KeyNumpad4%
+KeyNumpad5 = %KeyNumpad5%
+KeyNumpad6 = %KeyNumpad6%
+KeyNumpad7 = %KeyNumpad7%
+KeyNumpad8 = %KeyNumpad8%
+KeyNumpad9 = %KeyNumpad9%
 	), %A_ScriptDir%\Settings\Keys.ucl, UTF-8
 return
 
@@ -310,18 +327,13 @@ if isWelcomeDone ;Make sure GUI doesn't appear before Welcome Msgbox is gone
 {
 	DisableMouse := false
 	BlockInput, MouseMoveOff
-	GoSub ToggleGui
-}
-return
-
-Esc::
-ToggleGui:
-if(GuiHidden){
-	Gui, Show,, %AppTitle%
-	GuiHidden = 0
-}Else{
-	Gui, Show,Hide,
-	GuiHidden = 1
+	if(GuiHidden){
+		Gui, Show,, %AppTitle%
+		GuiHidden = 0
+	}Else{
+		Gui, Show,Hide,
+		GuiHidden = 1
+	}
 }
 return
 
@@ -402,7 +414,7 @@ BlockInput, MouseMove
 *NumpadRight::Return
 *NumpadUp::Return
 *NumpadDown::Return
-	;Synaptics Clickpad driver uses LCtrl + undetectable vertical scroll for pinch zoom
+	;Synaptics Clickpad driver has priority on Mouse wheel Roll for its own two-fingered vertical scroll and pinch zoom, so this script cannot disable two fingered gestures completely.
 return
 
 /*
@@ -664,3 +676,13 @@ m::Send {Space}{Backspace}%KeyM%
 ,::Send {Space}{Backspace}%KeyComma%
 .::Send {Space}{Backspace}%KeyPeriod%
 /::Send {Space}{Backspace}%KeySlash%
+
+Numpad1::Send {Space}{Backspace}%KeyNumpad1%
+Numpad2::Send {Space}{Backspace}%KeyNumpad2%
+Numpad3::Send {Space}{Backspace}%KeyNumpad3%
+Numpad4::Send {Space}{Backspace}%KeyNumpad4%
+Numpad5::Send {Space}{Backspace}%KeyNumpad5%
+Numpad6::Send {Space}{Backspace}%KeyNumpad6%
+Numpad7::Send {Space}{Backspace}%KeyNumpad7%
+Numpad8::Send {Space}{Backspace}%KeyNumpad8%
+Numpad9::Send {Space}{Backspace}%KeyNumpad9%

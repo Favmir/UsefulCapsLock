@@ -1,3 +1,7 @@
+2022/09/13	v1.5.5
+- Numpad 1–9 keys added.
+- Hopefully fixed the annoying bug where the script stopped working, and only could be fixed by saving the settings again. Probably didn't.
+
 2022/09/01	v1.5.4
 - Localization updated. Can now hide Gui with Win/Alt + Caps lock
 
