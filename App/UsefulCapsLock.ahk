@@ -21,7 +21,7 @@ SetBatchLines -1
 
 ;KeyHistory
 
-#include %A_ScriptDir%\Settings\Localization.ucl
+#include %A_ScriptDir%\Settings\Localization
 
 ;============ Add Tray ============
 Menu, Tray, Icon,,, 1	;freeze current icon
@@ -40,7 +40,7 @@ Menu, Tray, Default, %TrayMenuPause%
 
 ;=========================== Initialize
 isWelcomeDone := false
-#include %A_ScriptDir%\Settings\NoStartPop.ucl
+#include %A_ScriptDir%\Settings\NoStartPop
 
 if(NoStartPop == 0)
 {
@@ -48,11 +48,11 @@ if(NoStartPop == 0)
 	ControlSetText, Button2, Never Show
 	ifMsgBox, Cancel
 	{
-		FileDelete %A_ScriptDir%\Settings\NoStartPop.ucl
+		FileDelete %A_ScriptDir%\Settings\NoStartPop
 		FileAppend, 
 		(
 		NoStartPop := 1
-		), %A_ScriptDir%\Settings\NoStartPop.ucl, UTF-8
+		), %A_ScriptDir%\Settings\NoStartPop, UTF-8
 	}
 }
 
@@ -71,11 +71,11 @@ if(NoStartPop == 0){
 WelcomeCheck:
 	if(NeverShow == 1)
 	{
-		FileDelete %A_ScriptDir%\Settings\NoStartPop.ucl
+		FileDelete %A_ScriptDir%\Settings\NoStartPop
 		FileAppend, 
 		(
 		NoStartPop := 1
-		), %A_ScriptDir%\Settings\NoStartPop.ucl, UTF-8
+		), %A_ScriptDir%\Settings\NoStartPop, UTF-8
 	}
 	Gui, WelcomeWin:Destroy
 return
@@ -88,7 +88,7 @@ EnableSuper := false
 
 
 
-#include %A_ScriptDir%\Settings\Keys.ucl
+#include %A_ScriptDir%\Settings\Keys
 #include %A_ScriptDir%\Scripts\BuildMainGui.ahk
 
 Gui -SysMenu
@@ -191,8 +191,8 @@ GuiAbout:
 return
 
 GuiDefault:
-	FileDelete %A_ScriptDir%\Settings\Keys.ucl
-	FileCopy %A_ScriptDir%\Settings\Keys_Default.ucl, %A_ScriptDir%\Settings\Keys.ucl, 1
+	FileDelete %A_ScriptDir%\Settings\Keys
+	FileCopy %A_ScriptDir%\Settings\Keys_Default, %A_ScriptDir%\Settings\Keys, 1
 	GoSub ReadSettings
 	GoSub GuiRefresh
 return
@@ -255,11 +255,11 @@ GuiRefresh:
 return
 
 ReadSettings:
-	#IncludeAgain, %A_ScriptDir%\Settings\Keys.ucl
+	#IncludeAgain, %A_ScriptDir%\Settings\Keys
 return
 
 WriteSettings:
-	FileDelete %A_ScriptDir%\Settings\Keys.ucl
+	FileDelete %A_ScriptDir%\Settings\Keys
 	FileAppend,
 	(
 UpScroll := %UpScroll%
@@ -305,7 +305,7 @@ KeyNumpad6 = %KeyNumpad6%
 KeyNumpad7 = %KeyNumpad7%
 KeyNumpad8 = %KeyNumpad8%
 KeyNumpad9 = %KeyNumpad9%
-	), %A_ScriptDir%\Settings\Keys.ucl, UTF-8
+	), %A_ScriptDir%\Settings\Keys, UTF-8
 return
 
 GuiPause:

@@ -1,4 +1,4 @@
-#include %A_ScriptDir%\Settings\Gui.ucl
+#include %A_ScriptDir%\Settings\Gui
 LayoutWBSlsh := LayoutWBSpc + LayoutW - LayoutWTab
 LayoutWEnter := LayoutWBSpc + LayoutW + LayoutW - LayoutWCaps + LayoutG
 LayoutWRShift := LayoutWBSpc + LayoutW + LayoutW + LayoutW - LayoutWShift + LayoutG + LayoutG
