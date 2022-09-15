@@ -191,8 +191,9 @@ GuiAbout:
 return
 
 GuiDefault:
-	FileCopy Keys_Default.ucl, Keys.ucl, 1
-	GoSub ReadDefaultSettings
+	FileDelete %A_ScriptDir%\Settings\Keys.ucl
+	FileCopy %A_ScriptDir%\Settings\Keys_Default.ucl, %A_ScriptDir%\Settings\Keys.ucl, 1
+	GoSub ReadSettings
 	GoSub GuiRefresh
 return
 
@@ -254,11 +255,7 @@ GuiRefresh:
 return
 
 ReadSettings:
-	#include %A_ScriptDir%\Settings\Keys.ucl
-return
-
-ReadDefaultSettings:
-	#include %A_ScriptDir%\Settings\Keys_Default.ucl
+	#IncludeAgain, %A_ScriptDir%\Settings\Keys.ucl
 return
 
 WriteSettings:
