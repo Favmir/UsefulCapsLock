@@ -382,6 +382,7 @@ return
 
 CapsLock Up::
 EnableHK := false
+send {LControl up}
 return
 /*
 SHIFT+F1=F13
