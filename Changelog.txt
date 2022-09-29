@@ -1,3 +1,6 @@
+2022/09/29 v1.5.7
+- Temporary fix for Ctrl held bug
+
 2022/09/15	v1.5.6
 - Fixed reading saved keys and restore default function.
 

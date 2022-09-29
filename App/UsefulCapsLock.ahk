@@ -382,7 +382,7 @@ return
 
 CapsLock Up::
 EnableHK := false
-send {LControl up}
+send {LControl up}	;hotfix for ctrl held bug
 return
 /*
 SHIFT+F1=F13
