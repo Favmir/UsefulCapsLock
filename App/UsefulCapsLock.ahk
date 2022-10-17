@@ -23,6 +23,21 @@ SetBatchLines -1
 
 #include %A_ScriptDir%\Settings\Localization
 
+;for synaptics toucpad
+;ToucpadToggle(1) enables, (0) disables, (else) toggles.
+TouchpadToggle(setter) {
+	SynAPI:=ComObjCreate("SynCtrl.SynAPICtrl"), SynDev:=ComObjCreate("SynCtrl.SynDeviceCtrl")
+	SynAPI.Initialize
+	SynDev.Select(SynAPI.FindDevice(0,2,-1))
+	if(setter == 0){
+		SynDev.SetLongProperty(268435825, 1)
+	}else if(setter == 1){
+		SynDev.SetLongProperty(268435825, 0)
+	}else{
+		SynDev.SetLongProperty(268435825, State:=(!SynDev.GetLongProperty(268435825) ? 1 : 0))
+	}
+}
+
 ;============ Add Tray ============
 Menu, Tray, Icon,,, 1	;freeze current icon
 Menu, Tray, Icon, %A_ScriptDir%\Icons\icon(32x32).png, 1, 1
@@ -346,6 +361,7 @@ else{
 	LockMouse := true
 	DisableMouse := true
 	BlockInput, MouseMove
+	TouchpadToggle(0)
 	Gui, MLWin:New, +AlwaysOnTop -Sysmenu, %PopTitleMouseLock%
 	Gui, Font, s12, Segoe UI
 	Gui, Add, Text,, %PopDescMouseLock%
@@ -377,12 +393,12 @@ EnableHK := true
 if LockMouse{
 	DisableMouse := true
 	BlockInput, MouseMove
+	TouchpadToggle(0)
 }
 return
 
 CapsLock Up::
 EnableHK := false
-send {LControl up}	;hotfix for ctrl held bug
 return
 /*
 SHIFT+F1=F13
@@ -399,21 +415,24 @@ SHIFT+F11=F23
 SHIFT+F12=F24
 */
 
-#If DisableMouse	;Synaptics Clickpad driver's vertical scroll is undetectable by AHK
-*LButton::return
-*RButton::return
+#If DisableMouse	;Synaptics Clickpad driver's wheel scroll is undetectable by AHK
+TouchpadToggle(0)
+Send {CtrlUp}
 BlockInput, MouseMove
-*WheelUp::Return
-*WheelDown::Return
-*Wheelleft::Return
-*Wheelright::Return
-*MButton::Return
-*NumpadLeft::Return	;Synaptics Clickpad driver uses NumpadLeft and NumpadRight for horizontal scroll
-*NumpadRight::Return
-*NumpadUp::Return
-*NumpadDown::Return
+*LButton::
+*RButton::
+*WheelUp::
+*WheelDown::
+*Wheelleft::
+*Wheelright::
+*MButton::
+*NumpadLeft::	;Synaptics Clickpad driver uses NumpadLeft and NumpadRight for horizontal scroll
+*NumpadRight::
+*NumpadUp::
+*NumpadDown::
 	;Synaptics Clickpad driver has priority on Mouse wheel Roll for its own two-fingered vertical scroll and pinch zoom, so this script cannot disable two fingered gestures completely.
 return
+
 
 /*
 #If EnableSuper
@@ -520,6 +539,7 @@ KeyPressed:
 if LockMouse{
 	DisableMouse := true
 	BlockInput, MouseMove
+	TouchpadToggle(0)
 }
 Return
 
@@ -529,6 +549,7 @@ w::
 if LockMouse{
 	DisableMouse := false
 	BlockInput, MouseMoveOff
+	TouchpadToggle(1)
 }
 return
 
