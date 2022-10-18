@@ -26,6 +26,7 @@ SetBatchLines -1
 ;for synaptics toucpad
 ;ToucpadToggle(1) enables, (0) disables, (else) toggles.
 TouchpadToggle(setter) {
+	Enabled := ComObjError(False)
 	SynAPI:=ComObjCreate("SynCtrl.SynAPICtrl"), SynDev:=ComObjCreate("SynCtrl.SynDeviceCtrl")
 	SynAPI.Initialize
 	SynDev.Select(SynAPI.FindDevice(0,2,-1))
