@@ -595,6 +595,26 @@ if(RegExMatch(Clipboard, "[^0-9+\-\(\)=nijklmxyz]") == 0){ ;can be superscriptif
 	Clipboard := StrReplace(Clipboard, "x", "ˣ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "y", "ʸ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "z", "ᶻ",, Limit := -1)
+/*
+	Clipboard := StrReplace(Clipboard, "a", "ᵃ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "b", "ᵇ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "c", "ᶜ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "d", "ᵈ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "e", "ᵉ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "f", "ᶠ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "g", "ᵍ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "h", "ʰ",, Limit := -1)
+
+	Clipboard := StrReplace(Clipboard, "o", "ᵒ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "p", "ᵖ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "q", "𐞥",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "r", "ʳ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "s", "ˢ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "t", "ᵗ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "u", "ᵘ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "v", "ᵛ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "w", "ʷ",, Limit := -1)
+*/
 	;Msgbox, %Clipboard%
 	SendRaw, % Clipboard
 }else{
@@ -610,21 +630,21 @@ Clipsaved := ""	;free up memory
 return
 
 ; Navigate: Press CapsLock and these keys to navigate without moving your hands.
-i::Send {Up}
-j::Send {Left}
-k::Send {Down}
-l::Send {Right}
-e::Send ^{Up}
-d::Send ^{Down}
+i::Up
+j::Left
+k::Down
+l::Right
+e::^Up
+d::^Down
 r::Send {Up %UpScroll%}
 f::Send {Down %DownScroll%}
-u::Send ^{Left}
-o::Send ^{Right}
-h::Send {Home}
-`;::Send {End}
-
+u::^Left
+o::^Right
+h::Home
+`;::End
 
 ; Selection: Pressing either 'Shift' or 's' while pressing CapsLock acts as selection key(what shift key does normally). 
+;s::Shift
 s & i::Send +{Up}
 s & j::Send +{Left}
 s & k::Send +{Down}
@@ -635,18 +655,8 @@ s & u::Send +^{Left}
 s & o::Send +^{Right}
 s & h::Send +{Home}
 s & `;::Send +{End}
-
-+i::Send +{Up}
-+j::Send +{Left}
-+k::Send +{Down}
-+l::Send +{Right}
 +r::Send +{Up %UpScroll%}
 +f::Send +{Down %DownScroll%}
-+u::Send +^{Left}
-+o::Send +^{Right}
-+h::Send +{Home}
-+`;::Send +{End}
-
 
 ; Custom Keybinds
 `::Send {Space}{Backspace}%KeyGrave%
