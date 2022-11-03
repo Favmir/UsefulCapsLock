@@ -1,5 +1,5 @@
 # UsefulCapsLock
-![Gui](/Desc.jpg)
+![Gui](/V170GUI.png)
 
 An AutoHotKey Script that helps you edit text.
 
