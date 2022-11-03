@@ -1,5 +1,5 @@
 # UsefulCapsLock
-![Gui](/V170GUI.png)
+![Gui](/etc/V170GUI.png)
 
 An AutoHotKey Script that helps you edit text.
 
@@ -12,14 +12,14 @@ Some people solve these problems via a Pointing Stick(a.k.a. red nipple) but I p
 
 ## Installation
 Well, this is a portable program, so you don't need to 'install' this per se.
-* You can run the program either by running `Launch Useful Caps Lock.bat` or `UsefulCapsLock.ahk`.
-* Run `Add to Startup Menu.lnk` to make this script automatically run on reboot.
-* If you don't want it on your computer anymore, use `Open Startup Menu.lnk` to go to startup menu and delete the shortcut.
+* You can run the program either by running `Launch Useful Caps Lock.bat` or `UsefulCapsLock.exe`.
+* Run `App\Add to Startup.bat` to make this script automatically run on reboot.
+* If you don't want it on your computer anymore, use `App\Open Startup Menu.lnk` to go to startup menu and delete the shortcut.
 
 ## How to Use
-* `[Windows + Caps Lock]` brings out the GUI menu above. 
-* `[Caps Lock + white key]` sends the allocated text.
-* `[Caps Lock + grayed out key]` carries out pre-determined functions. You can see which key exactly does what by clicking on the keys.
+* `[LAlt + Caps Lock]` brings out the GUI menu above. 
+* `[Caps Lock + Editable key]` sends the allocated text.
+* `[Caps Lock + Buttoned key]` carries out pre-determined functions. For example, press Caps Lock + IJKL to move your cursor. You can see which key exactly does what by clicking on the key buttons.
 * `[Mouse Lock]` checkbox disables mouse input and only re-enables it when you press `[Caps Lock + W]`, so you won’t have to suffer from Touchpad palm press syndrome anymore.
 * `[Shift + Caps Lock]` carries out the original Caps Lock function
 
@@ -30,7 +30,7 @@ I've only tested a few multiplayer games:
 * Monster Hunter World/Rise - Hotkeys don't work on text boxes for some reason. No negative consequences(Monster Hunter doesn't ban cheats at all anyways).
 * Overwatch - Works. Doesn't detect this as a cheating software.
 * Team Fortress 2 - No problem.
-* Lost Ark(MMORPG) - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game.
+* Lost Ark - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game.
 
 ## Changelog
 [Open Changelog](Changelog.txt}
