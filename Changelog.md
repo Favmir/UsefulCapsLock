@@ -44,7 +44,7 @@
 - Added Ctrl row to Gui
 
 2021/10/03	v1.3.1
-- Fixed new bug introduced in recent Windows updateo
+- Fixed new bug introduced in recent Windows update
 - Added option to disable startup popup message box
 
 2020/09/XX	v1.1.6

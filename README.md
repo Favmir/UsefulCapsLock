@@ -21,7 +21,7 @@ Well, this is a portable program, so you don't need to 'install' this per se.
 * `[Caps Lock + Editable key]` sends the allocated text.
 * `[Caps Lock + Buttoned key]` carries out pre-determined functions. For example, press Caps Lock + IJKL to move your cursor. You can see which key exactly does what by clicking on the key buttons.
 * `[Mouse Lock]` checkbox disables mouse input and only re-enables it when you press `[Caps Lock + W]`, so you won’t have to suffer from Touchpad palm press syndrome anymore.
-* `[Shift + Caps Lock]` carries out the original Caps Lock function
+* `[Shift + Caps Lock]` carries out the original Caps Lock function.
 
 ## Issues (with games)
 I've left this script running while playing games, and so far had no problem at all with single-player games.
