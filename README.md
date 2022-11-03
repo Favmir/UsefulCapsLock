@@ -1,4 +1,4 @@
-# UsefulCapsLock
+# Useful Caps Lock
 ![Gui](/etc/V170GUI.png)
 
 An AutoHotKey Script that helps you edit text.
