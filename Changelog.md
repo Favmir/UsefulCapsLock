@@ -3,6 +3,8 @@
 - Added Text Color Setting
 - Improved Gui consistency
 - Compiled the program
+- Fixed a bug where it'd take 2 tries to open gui if it was closed via save/cancel button
+- Shortcuts changed to be read-only to avoid commit clutter
 
 2022/10/17	v1.6.1
 - [Caps Lock + Shift + Ctrl + h/;] now works

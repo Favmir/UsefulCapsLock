@@ -109,7 +109,6 @@ EnableSuper := false
 
 Gui -SysMenu
 Gui, Show, w%LayoutTotalW% h%LayoutTotalH% Hide, %AppTitle%
-GuiHidden := 1
 return
 
 TrayTitle:
@@ -341,12 +340,10 @@ if isWelcomeDone ;Make sure GUI doesn't appear before Welcome Msgbox is gone
 {
 	DisableMouse := false
 	BlockInput, MouseMoveOff
-	if(GuiHidden){
-		Gui, Show,, %AppTitle%
-		GuiHidden = 0
-	}Else{
-		Gui, Show,Hide,
-		GuiHidden = 1
+	if (WinExist("Useful Caps Lock")){
+        Gui, Show,Hide,
+	}else{
+        Gui, Show,, %AppTitle%
 	}
 }
 return
