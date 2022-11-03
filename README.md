@@ -6,7 +6,7 @@ An AutoHotKey Script that helps you edit text.
 I made this script to solve my problem of
 1. palm grazing my laptop touchpad constantly
 2. arrow keys are in such inconvient places when you need to move your cursor through text a lot
-3. Wasted time and effort when I want to use a character that isn't present in my keyboard (Em Dash, for example, which I use for every day writing)
+3. Wasted time and effort when I want to use a character that isn't present in my keyboard (Em Dash, for example, which I use for everyday writing)
 
 Some people solve these problems via a Pointing Stick(a.k.a. red nipple) but I prefer my solution.
 
