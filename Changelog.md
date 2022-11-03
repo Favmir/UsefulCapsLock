@@ -9,7 +9,7 @@
 
 2022/10/17	v1.6.0
 - Implemented Synaptics driver disable function.
-- Which hopefully fixed that Ctrl held bug(how to reproduce: try to use pinch zoom on touchpad, and while the fingers are still touching the pad, use caps lock + ijkl to navigate).
+- Which finally fixed that Ctrl held bug(how to reproduce: try to use pinch zoom on touchpad, and while the fingers are still touching the pad, use caps lock + ijkl to navigate).
 
 2022/09/29	v1.5.7
 - Temporary fix for Ctrl held bug
