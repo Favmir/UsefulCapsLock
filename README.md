@@ -33,7 +33,7 @@ I've only tested a few multiplayer games:
 * Lost Ark - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game.
 
 ## Changelog
-[Open Changelog](Changelog.txt}
+[Open Changelog](Changelog.md}
 
 ## To Do List
 - [ ] Rewrite this botched mess of a code in AHK v2
