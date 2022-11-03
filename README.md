@@ -12,9 +12,9 @@ Some people solve these problems via a Pointing Stick(a.k.a. red nipple) but I p
 
 ## Installation
 Well, this is a portable program, so you don't need to 'install' this per se.
-* You can run the program either by running `Launch Useful Caps Lock.bat` or `UsefulCapsLock.exe`.
-* Run `App\Add to Startup.bat` to make this script automatically run on reboot.
-* If you don't want it on your computer anymore, use `App\Open Startup Menu.lnk` to go to startup menu and delete the shortcut.
+* Start the program by running `Useful Caps Lock.lnk` shortcut.
+* Run `App\Add to Startup.bat` to make this script automatically run when starting the computer.
+* If you don't want it on your computer anymore, use `App\Remove from Startup.bat` to delete the shortcut.
 
 ## How to Use
 * `[LAlt + Caps Lock]` brings out the GUI menu above. 
