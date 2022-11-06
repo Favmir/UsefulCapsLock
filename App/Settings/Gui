@@ -10,8 +10,9 @@ ControlWidth := 16			;Left Ctrl(and other function keys like Windows) Width
 
 GuiSize := 6				;Multiplier for the size of GUI
 
-ColorBg := "EEEEE9"			;Background Color
+ColorBg := "D9D9EE"			;Background Color
 ;ColorBtn := "F0F0EF"		;color not supported for ahk buttons
-ColorTxt := "9595BA"		;Text color
-ColorTxtBg := "FFFFFF"	;Text background color
+ColorTxt := "9595BA"		;Editable text color
+;ColorTxtBg := "FFFFFF"		;Editable text background color — not used
+ColorPanelTxt := "555590"	;Panel text color
 ;ColorStop := "FF8888"		;not used

@@ -61,7 +61,6 @@ isWelcomeDone := false
 if(NoStartPop == 0)
 {
 	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
-	ControlSetText, Button2, Never Show
 	ifMsgBox, Cancel
 	{
 		FileDelete %A_ScriptDir%\Settings\NoStartPop
@@ -72,17 +71,19 @@ if(NoStartPop == 0)
 	}
 }
 
-
 /*
-Gui, WelcomeWin:New, +AlwaysOnTop -Sysmenu, %PopTitleWelcome%
-Gui, Font, s12, Segoe UI
-Gui, Add, Text,, %PopDescWelcome%
-Gui, Font, s15 Bold, Segoe UI
-Gui, Add, Button, Center gWelcomeCheck, %PopButtonWelcomeOK%
-Gui, Add, Checkbox, Center vNeverShow, %PopButtonWelcomeNever%
+
 if(NoStartPop == 0){
-	Gui, WelcomeWin:Show
+	Gui, WelcomeWin:New, +AlwaysOnTop -Sysmenu, %PopTitleWelcome%
+	Gui, Font, s12, Segoe UI
+	Gui, Add, Text,, %PopDescWelcome%
+	Gui, Font, s15 Bold, Segoe UI
+	Gui, Add, Checkbox, Center vNeverShow, %PopButtonWelcomeNever%
+	Gui, Add, Button, Center gWelcomeCheck, %PopButtonWelcomeOK%
 }
+Gui, WelcomeWin:Show
+return
+
 
 WelcomeCheck:
 	if(NeverShow == 1)
@@ -93,7 +94,7 @@ WelcomeCheck:
 		NoStartPop := 1
 		), %A_ScriptDir%\Settings\NoStartPop, UTF-8
 	}
-	Gui, WelcomeWin:Destroy
+	Gui, WelcomeWin:Hide
 return
 */
 
@@ -102,14 +103,9 @@ EnableHK := false
 SetCapsLockState Off
 EnableSuper := false
 
-
-
 #include %A_ScriptDir%\Settings\Keys
 #include %A_ScriptDir%\Scripts\BuildMainGui.ahk
 
-Gui -SysMenu
-Gui, Show, w%LayoutTotalW% h%LayoutTotalH% Hide, %AppTitle%
-return
 
 TrayTitle:
 return
@@ -341,7 +337,7 @@ if isWelcomeDone ;Make sure GUI doesn't appear before Welcome Msgbox is gone
 	DisableMouse := false
 	BlockInput, MouseMoveOff
 	if (WinExist("Useful Caps Lock")){
-        Gui, Show,Hide,
+        Gui, Show, Hide,
 	}else{
         Gui, Show,, %AppTitle%
 	}

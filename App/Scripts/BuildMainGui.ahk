@@ -42,23 +42,25 @@ Uni_right := Chr(0x2C3)
 Uni_enter := Chr(0x21B5)
 Uni_shift := Chr(0x21E7)
 
+Gui, -SysMenu +AlwaysOnTop
+Gui, Show, w%LayoutTotalW% h%LayoutTotalH% Hide, %AppTitle%
+Gui, Color, %ColorBg%
+Gui Font, s%FontSize% Bold, Segoe UI
 
 ;change edit regex
 ;before:		\nGui Add, Edit, c%ColorTxt% x([^ ]+) y([^ ]+) w([^ ]+) h([^ ]+) -VScroll \+Center vKey([^ ]+) \+WantTab -Theme, %Key([^ ]+)%
 ;after:			\nGui Add, Edit, c%ColorTxt% x$1 y$2 w$3 h$4 -VScroll +Center vKey$5 +WantTab -Theme, %Key$6%
 
-Gui, Color, %ColorBg%
 ;======== Esc Row
-Gui Font, s%FontSize% Bold, Segoe UI
 Gui Add, Button, x%LayoutG% y%LayoutG% w%LayoutW% h%LayoutH% -VScroll +Center, Esc			;Esc
-Gui Add, Edit, xp+%LayoutWG% yp w%LayoutWDescFront% hp -VScroll +Center +ReadOnly, %MenuDescFront%
+Gui Add, Edit, c%ColorPanelTxt% Background xp+%LayoutWG% yp w%LayoutWDescFront% hp -VScroll +Center +ReadOnly -Theme, %MenuDescFront%
 Temp := LayoutTotalW - LayoutWTab - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWTab% hp -VScroll +Center gGuiAbout, About
 Temp := Temp - LayoutWTab - LayoutG
 Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center gGuiMLock, Mouse Lock
 Temp := (Temp - LayoutWDescFront - LayoutWG - LayoutG*3)
 Temp2 := LayoutWG + LayoutWDescFront + LayoutG*2
-Gui Add, Edit, x%Temp2% yp w%Temp% hp -VScroll +Center +ReadOnly, %MenuDescFront2%
+Gui Add, Edit, c%ColorPanelTxt% x%Temp2% yp w%Temp% hp -VScroll +Center +ReadOnly -Theme, %MenuDescFront2%
 ;======== Number Row
 Gui Add, Edit, c%ColorTxt% x%LayoutG% yp+%LayoutHG% w%LayoutW% h%LayoutH% -VScroll +Center vKeyGrave +WantTab -Theme, %KeyGrave%
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKey1 +WantTab -Theme, %Key1%
@@ -77,7 +79,7 @@ Gui Add, Button, xp+%LayoutWG% yp w%LayoutWBSpc% hp -VScroll +Center +ReadOnly, 
 ;======== QWERTY Row
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWTab% hp -VScroll +Center +ReadOnly, Tab %Uni_tab%		;Tab
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWTabG% yp w%LayoutW% hp -VScroll +Center vKeyQ +WantTab -Theme, %KeyQ%						;Q
-Gui Add, Button, xp+%LayoutWG% yp w%LayoutW% hp -VScroll +Center gDescMLock +ReadOnly, Ms Lock		;W
+Gui Add, Button, xp+%LayoutWG% yp w%LayoutW% hp -VScroll +Center gDescMLock +ReadOnly, Mouse Lock		;W
 Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescPanUp +ReadOnly, Pan Up				;E
 Gui, Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescScrollUp +ReadOnly, Scroll			;R
 Gui, Add, UpDown, vUpScroll Range1-12, 6
@@ -150,4 +152,5 @@ Temp := Temp - LayoutWBSpc - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWBSpc% hp -VScroll +Center gGuiSave, %MenuButtonSave%
 Temp := Temp - LayoutWShift - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWShift% hp -VScroll +Center gGuiDefault, %MenuButtonDefaults%
-Gui Font
+
+
