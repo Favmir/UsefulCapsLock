@@ -1,9 +1,15 @@
+2022/11/14 v1.7.2
+- Removed SendMode Input to add more delay, which fixes the bug where continously pressing CapsLock+Bound key sometimes sends the original key input instead of the hotkey.
+
+2022/11/06 v1.7.1
+- Updated GUI. It's lavender blue now.
+
 2022/11/03	v1.7.0
-- Added Gui Size Setting
+- Added GUI Size Setting
 - Added Text Color Setting
-- Improved Gui consistency
+- Improved GUI consistency
 - Compiled the program
-- Fixed a bug where it'd take 2 tries to open gui if it was closed via save/cancel button
+- Fixed a bug where it'd take 2 tries to open GUI if it was closed via save/cancel button
 - Shortcuts changed to be read-only to avoid commit clutter
 
 2022/10/17	v1.6.1
@@ -24,7 +30,7 @@
 - Hopefully fixed the annoying bug where the script stopped working, and only could be fixed by saving the settings again. Probably didn't.
 
 2022/09/01	v1.5.4
-- Localization updated. Can now hide Gui with Win/Alt + Caps lock
+- Localization updated. Can now hide GUI with Win/Alt + Caps lock
 
 2022/08/18	v1.5.3
 - Mouse Lock also disables mouse scrolling.
@@ -43,14 +49,14 @@
 
 2021/12/XX	v1.4.0
 - Improved ^() key function
-- Added Ctrl row to Gui
+- Added Ctrl row to GUI
 
 2021/10/03	v1.3.1
 - Fixed new bug introduced in recent Windows update
 - Added option to disable startup popup message box
 
 2020/09/XX	v1.1.6
-- Opening Gui now cancels script suspend
+- Opening GUI now cancels script suspend
 - Added App folder
 - Added "Useful Caps Lock" shortcut to take batch file's place
 - Renamed "AddButtons.ahk" to "BuildButtons.ahk"
@@ -76,12 +82,12 @@
 
 2020/09/15	v1.0
 - Code cleanup
-- Enhanced keyboard gui
-- Removed previous main menu(made obsolete by the keyboard gui)
+- Enhanced keyboard GUI
+- Removed previous main menu(made obsolete by the keyboard GUI)
 
 2020/09/XX	v0.9
-- Added button to bring up custom keyboard gui to the main menu
-- Removed options submenu(made obsolete by the new keyboard gui)
+- Added button to bring up custom keyboard GUI to the main menu
+- Removed options submenu(made obsolete by the new keyboard GUI)
 
 2020/09/09	v0.6
 - Added special characters input functionality

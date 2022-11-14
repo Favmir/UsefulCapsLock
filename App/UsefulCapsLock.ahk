@@ -15,7 +15,8 @@
 #SingleInstance Force
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+;SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+;BUT SendMode Input also causes input to leak through even when you're pressing capslock because it's too fast and has no delay.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
 
@@ -479,63 +480,57 @@ m::Send ∑
 .::Send ≥
 /::Send ÷
 */
+#If !EnableHK && LockMouse
+~a::
+~b::
+~c::
+~d::
+~e::
+~f::
+~g::
+~h::
+~i::
+~j::
+~k::
+~l::
+~m::
+~n::
+~o::
+~p::
+~q::
+~r::
 
-#If !EnableHK
-~a::Gosub KeyPressed
-~b::Gosub KeyPressed
-~c::Gosub KeyPressed
-~d::Gosub KeyPressed
-~e::Gosub KeyPressed
-~f::Gosub KeyPressed
-~g::Gosub KeyPressed
-~h::Gosub KeyPressed
-~i::Gosub KeyPressed
-~j::Gosub KeyPressed
-~k::Gosub KeyPressed
-~l::Gosub KeyPressed
-~m::Gosub KeyPressed
-~n::Gosub KeyPressed
-~o::Gosub KeyPressed
-~p::Gosub KeyPressed
-~q::Gosub KeyPressed
-~r::Gosub KeyPressed
-
-~t::Gosub KeyPressed
-~u::Gosub KeyPressed
-~v::Gosub KeyPressed
-~w::Gosub KeyPressed
-~x::Gosub KeyPressed
-~y::Gosub KeyPressed
-~z::Gosub KeyPressed
-~,::Gosub KeyPressed
-~.::Gosub KeyPressed
-~/::Gosub KeyPressed
-~`;::Gosub KeyPressed
-~'::Gosub KeyPressed
-~[::Gosub KeyPressed
-~]::Gosub KeyPressed
-~`::Gosub KeyPressed
-~1::Gosub KeyPressed
-~2::Gosub KeyPressed
-~3::Gosub KeyPressed
-~4::Gosub KeyPressed
-~5::Gosub KeyPressed
-~6::Gosub KeyPressed
-~7::Gosub KeyPressed
-~8::Gosub KeyPressed
-~9::Gosub KeyPressed
-~0::Gosub KeyPressed
-~-::Gosub KeyPressed
-~=::Gosub KeyPressed
-~\::Gosub KeyPressed
-
-
-KeyPressed:
-if LockMouse{
-	DisableMouse := true
-	BlockInput, MouseMove
-	TouchpadToggle(0)
-}
+~t::
+~u::
+~v::
+~w::
+~x::
+~y::
+~z::
+~,::
+~.::
+~/::
+~`;::
+~'::
+~[::
+~]::
+~`::
+~1::
+~2::
+~3::
+~4::
+~5::
+~6::
+~7::
+~8::
+~9::
+~0::
+~-::
+~=::
+~\::
+DisableMouse := true
+BlockInput, MouseMove
+TouchpadToggle(0)
 Return
 
 
