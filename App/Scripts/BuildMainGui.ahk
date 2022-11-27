@@ -57,7 +57,7 @@ Gui Add, Edit, c%ColorPanelTxt% Background xp+%LayoutWG% yp w%LayoutWDescFront% 
 Temp := LayoutTotalW - LayoutWTab - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWTab% hp -VScroll +Center gGuiAbout, About
 Temp := Temp - LayoutWTab - LayoutG
-Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center gGuiMLock, Ms Lock
+Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center gGuiMLock, Mouse Lock
 Temp := (Temp - LayoutWDescFront - LayoutWG - LayoutG*3)
 Temp2 := LayoutWG + LayoutWDescFront + LayoutG*2
 Gui Add, Edit, c%ColorPanelTxt% x%Temp2% yp w%Temp% hp -VScroll +Center +ReadOnly -Theme, %MenuDescFront2%
@@ -79,7 +79,7 @@ Gui Add, Button, xp+%LayoutWG% yp w%LayoutWBSpc% hp -VScroll +Center +ReadOnly, 
 ;======== QWERTY Row
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWTab% hp -VScroll +Center +ReadOnly, Tab %Uni_tab%		;Tab
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWTabG% yp w%LayoutW% hp -VScroll +Center vKeyQ +WantTab -Theme, %KeyQ%						;Q
-Gui Add, Button, xp+%LayoutWG% yp w%LayoutW% hp -VScroll +Center gDescMLock +ReadOnly, Mouse Lock		;W
+Gui Add, Button, xp+%LayoutWG% yp w%LayoutW% hp -VScroll +Center gDescMLock +ReadOnly, Ms Lock		;W
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyE +WantTab -Theme, %KeyE%				;E
 Gui, Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescScrollUp +ReadOnly, Scroll			;R
 Gui, Add, UpDown, vUpScroll Range1-12, 6
