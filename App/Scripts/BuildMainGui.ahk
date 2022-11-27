@@ -57,7 +57,7 @@ Gui Add, Edit, c%ColorPanelTxt% Background xp+%LayoutWG% yp w%LayoutWDescFront% 
 Temp := LayoutTotalW - LayoutWTab - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWTab% hp -VScroll +Center gGuiAbout, About
 Temp := Temp - LayoutWTab - LayoutG
-Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center gGuiMLock, Mouse Lock
+Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center gGuiMLock, Ms Lock
 Temp := (Temp - LayoutWDescFront - LayoutWG - LayoutG*3)
 Temp2 := LayoutWG + LayoutWDescFront + LayoutG*2
 Gui Add, Edit, c%ColorPanelTxt% x%Temp2% yp w%Temp% hp -VScroll +Center +ReadOnly -Theme, %MenuDescFront2%
