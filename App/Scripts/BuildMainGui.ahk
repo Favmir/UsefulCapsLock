@@ -80,14 +80,16 @@ Gui Add, Button, xp+%LayoutWG% yp w%LayoutWBSpc% hp -VScroll +Center +ReadOnly, 
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWTab% hp -VScroll +Center +ReadOnly, Tab %Uni_tab%		;Tab
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWTabG% yp w%LayoutW% hp -VScroll +Center vKeyQ +WantTab -Theme, %KeyQ%						;Q
 Gui Add, Button, xp+%LayoutWG% yp w%LayoutW% hp -VScroll +Center gDescMLock +ReadOnly, Mouse Lock		;W
-Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescPanUp +ReadOnly, Pan Up				;E
+Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyE +WantTab -Theme, %KeyE%				;E
 Gui, Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescScrollUp +ReadOnly, Scroll			;R
 Gui, Add, UpDown, vUpScroll Range1-12, 6
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp h%LayoutH% -VScroll +Center vKeyT +WantTab -Theme, %KeyT%						;T
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyY +WantTab -Theme, %KeyY%								;Y
-Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescPrev +ReadOnly, Prev					;U
+Gui, Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescPrev +ReadOnly, Prev			;U
+Gui, Add, UpDown, vLeftScroll Range1-12, 6															;U
 Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescUp +ReadOnly, %Uni_up%						;I
-Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescNext +ReadOnly, Next					;O
+Gui, Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescNext +ReadOnly, Next			;O
+Gui, Add, UpDown, vRightScroll Range1-12, 6															;O
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyP +WantTab -Theme, %KeyP%								;P
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyLBracket +WantTab -Theme, %KeyLBracket%					;[
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyRBracket +WantTab -Theme, %KeyRBracket%					;]
@@ -99,9 +101,9 @@ Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyNumpad9 +
 
 ;======== Caps Lock Row
 Gui Add, Button, x%LayoutG% yp+%LayoutHG% w%LayoutWCaps% hp -VScroll +Center gDescCaps +ReadOnly cRed, Special	;Caps Lock
-Gui Add, Edit, c%ColorTxt% xp+%LayoutWCapsG% yp w%LayoutW% hp -VScroll +Center vKeyA +WantTab -Theme, %KeyA%					;A
+Gui Add, Button, xp+%LayoutWCapsG% yp w%LayoutW% hp -VScroll +Center gDescModify +ReadOnly, Ctrl					;A
 Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescSelect +ReadOnly, Shift				;S
-Gui Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescPanDn +ReadOnly, Pan Down				;D
+Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyD +WantTab -Theme, %KeyD%				;D
 Gui, Add, Button, xp+%LayoutWG% yp wp hp -VScroll +Center gDescScrollDn +ReadOnly, Scroll			;F
 Gui, Add, UpDown, vDownScroll Range1-12, 6															;F
 Gui Add, Edit, c%ColorTxt% xp+%LayoutWG% yp wp hp -VScroll +Center vKeyG +WantTab -Theme, %KeyG%								;G

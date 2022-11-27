@@ -38,6 +38,7 @@ TouchpadToggle(setter) {
 	}else{
 		SynDev.SetLongProperty(268435825, State:=(!SynDev.GetLongProperty(268435825) ? 1 : 0))
 	}
+	Return
 }
 
 ;============ Add Tray ============
@@ -167,6 +168,10 @@ DescMLock:
 	MsgBox, 4096,%MenuTitleKeys%, %MenuDescMLock%,
 return
 
+DescModify:
+	MsgBox, 4096, %MenuTitleKeys%, %MenuDescModify%,
+return
+
 DescSelect:
 	MsgBox, 4096,%MenuTitleKeys%, %MenuDescSelect%,
 return
@@ -224,6 +229,8 @@ return
 GuiRefresh:
 	GuiControl,, UpScroll, %UpScroll%
 	GuiControl,, DownScroll, %DownScroll%
+	GuiControl,, LeftScroll, %LeftScroll%
+	GuiControl,, RightScroll, %RightScroll%
 	GuiControl,, KeyGrave, %KeyGrave%
 	GuiControl,, Key1, %Key1%
 	GuiControl,, Key2, %Key2%
@@ -237,13 +244,14 @@ GuiRefresh:
 	GuiControl,, KeyHypen, %KeyHyphen%
 	GuiControl,, KeyEqual, %KeyEqual%
 	GuiControl,, KeyQ, %KeyQ%
+	GuiControl,, KeyE, %KeyE%
 	GuiControl,, KeyT, %KeyT%
 	GuiControl,, KeyY, %KeyY%
 	GuiControl,, KeyP, %KeyP%
 	GuiControl,, KeyLBracket, %KeyLBracket%
 	GuiControl,, KeyRBracket, %KeyRBracket%
 	GuiControl,, KeyBSlash, %KeyBSlash%
-	GuiControl,, KeyA, %KeyA%
+	GuiControl,, KeyD, %KeyD%
 	GuiControl,, KeyG, %KeyG%
 	GuiControl,, KeyQuote, %KeyQuote%
 	GuiControl,, KeyZ, %KeyZ%
@@ -277,6 +285,8 @@ WriteSettings:
 	(
 UpScroll := %UpScroll%
 DownScroll := %DownScroll%
+LeftScroll := %LeftScroll%
+RightScroll := %RightScroll%
 KeyGrave = %KeyGrave%
 Key1 = %Key1%
 Key2 = %Key2%
@@ -290,13 +300,14 @@ Key0 = %Key0%
 KeyHyphen = %KeyHyphen%
 KeyEqual = %KeyEqual%
 KeyQ = %KeyQ%
+KeyE = %KeyE%
 KeyT = %KeyT%
 KeyY = %KeyY%
 KeyP = %KeyP%
 KeyLBracket = %KeyLBracket%
 KeyRBracket = %KeyRBracket%
 KeyBSlash = %KeyBSlash%
-KeyA = %KeyA%
+KeyD = %KeyD%
 KeyG = %KeyG%
 KeyQuote = %KeyQuote%
 KeyZ = %KeyZ%
@@ -481,7 +492,7 @@ m::Send ∑
 /::Send ÷
 */
 #If !EnableHK && LockMouse
-~a::
+
 ~b::
 ~c::
 ~d::
@@ -627,81 +638,90 @@ e::^Up
 d::^Down
 r::Send {Up %UpScroll%}
 f::Send {Down %DownScroll%}
-u::^Left
-o::^Right
+u::Send {Left %LeftScroll%}
+o::Send {Right %RightScroll%}
 h::Home
 `;::End
 
+; Pressing 'a' acts as Contorl
+a::Ctrl
+
 ; Selection: Pressing either 'Shift' or 's' while pressing CapsLock acts as selection key(what shift key does normally). 
-;s::Shift
-s & i::Send +{Up}
-s & j::Send +{Left}
-s & k::Send +{Down}
-s & l::Send +{Right}
-s & r::Send +{Up %UpScroll%}
-s & f::Send +{Down %DownScroll%}
-s & u::Send +^{Left}
-s & o::Send +^{Right}
-s & h::Send +{Home}
-s & `;::Send +{End}
+s::Shift
+
+^r::Send ^{Up %UpScroll%}
+^f::Send ^{Down %DownScroll%}
+^u::Send ^{Left %LeftScroll%}
+^o::Send ^{Right %RightScroll%}
+
 +r::Send +{Up %UpScroll%}
 +f::Send +{Down %DownScroll%}
++u::Send +{Left %LeftScroll%}
++o::Send +{Right %RightScroll%}
+
+^+r::Send ^+{Up %UpScroll%}
+^+f::Send ^+{Down %DownScroll%}
+^+u::Send ^+{Left %LeftScroll%}
+^+o::Send ^+{Right %RightScroll%}
+
+
+
 
 ; Custom Keybinds
-`::Send {Space}{Backspace}%KeyGrave%
-1::Send {Space}{Backspace}%Key1%
-2::Send {Space}{Backspace}%Key2%
-3::Send {Space}{Backspace}%Key3%
-4::Send {Space}{Backspace}%Key4%
-5::Send {Space}{Backspace}%Key5%
-;6::Send {Space}{Backspace}%Key6%
-7::Send {Space}{Backspace}%Key7%
-8::Send {Space}{Backspace}%Key8%
-9::Send {Space}{Backspace}%Key9%
-0::Send {Space}{Backspace}%Key0%
--::Send {Space}{Backspace}%KeyHyphen%
-=::Send {Space}{Backspace}%KeyEqual%
-q::Send {Space}{Backspace}%KeyQ%
-;w::Send {Space}{Backspace}%KeyW%
-;e::Send {Space}{Backspace}%KeyE%
-;r::Send {Space}{Backspace}%KeyR%
-t::Send {Space}{Backspace}%KeyT%
-y::Send {Space}{Backspace}%KeyY%
-;u::Send {Space}{Backspace}%KeyU%
-;i::Send {Space}{Backspace}%KeyI%
-;o::Send {Space}{Backspace}%KeyO%
-p::Send {Space}{Backspace}%KeyP%
-[::Send {Space}{Backspace}%KeyLBracket%
-]::Send {Space}{Backspace}%KeyRBracket%
-\::Send {Space}{Backspace}%KeyBSlash%
-a::Send {Space}{Backspace}%KeyA%
-;s::Send {Space}{Backspace}%KeyS%
-;d::Send {Space}{Backspace}%KeyD%
-;f::Send {Space}{Backspace}%KeyF%
-g::Send {Space}{Backspace}%KeyG%
-;h::Send {Space}{Backspace}%KeyH%
-;j::Send {Space}{Backspace}%KeyJ%
-;k::Send {Space}{Backspace}%KeyK%
-;l::Send {Space}{Backspace}%KeyL%
-;`;::Send {Space}{Backspace}%KeyColon%
-'::Send {Space}{Backspace}%KeyQuote%
-z::Send {Space}{Backspace}%KeyZ%
-x::Send {Space}{Backspace}%KeyX%
-c::Send {Space}{Backspace}%KeyC%
-v::Send {Space}{Backspace}%KeyV%
-b::Send {Space}{Backspace}%KeyB%
-n::Send {Space}{Backspace}%KeyN%
-m::Send {Space}{Backspace}%KeyM%
-,::Send {Space}{Backspace}%KeyComma%
-.::Send {Space}{Backspace}%KeyPeriod%
-/::Send {Space}{Backspace}%KeySlash%
+`::Send %KeyGrave%
+1::Send %Key1%
+2::Send %Key2%
+3::Send %Key3%
+4::Send %Key4%
+5::Send %Key5%
+;6::Send %Key6%
+7::Send %Key7%
+8::Send %Key8%
+9::Send %Key9%
+0::Send %Key0%
+-::Send %KeyHyphen%
+=::Send %KeyEqual%
+q::Send %KeyQ%
+;w::Send %KeyW%
+e::Send %KeyE%
+;r::Send %KeyR%
+t::Send %KeyT%
+y::Send %KeyY%
+;u::Send %KeyU%
+;i::Send %KeyI%
+;o::Send %KeyO%
+p::Send %KeyP%
+[::Send %KeyLBracket%
+]::Send %KeyRBracket%
+\::Send %KeyBSlash%
+;a::Send %KeyA%
+;s::Send %KeyS%
+d::Send %KeyD%
+;f::Send %KeyF%
+g::Send %KeyG%
+;h::Send %KeyH%
+;j::Send %KeyJ%
+;k::Send %KeyK%
+;l::Send %KeyL%
+;`;::Send %KeyColon%
+'::Send %KeyQuote%
+z::Send %KeyZ%
+x::Send %KeyX%
+c::Send %KeyC%
+v::Send %KeyV%
+b::Send %KeyB%
+n::Send %KeyN%
+m::Send %KeyM%
+,::Send %KeyComma%
+.::Send %KeyPeriod%
+/::Send %KeySlash%
 
-Numpad1::Send {Space}{Backspace}%KeyNumpad1%
-Numpad2::Send {Space}{Backspace}%KeyNumpad2%
-Numpad3::Send {Space}{Backspace}%KeyNumpad3%
-Numpad4::Send {Space}{Backspace}%KeyNumpad4%
-Numpad5::Send {Space}{Backspace}%KeyNumpad5%
-Numpad6::Send {Space}{Backspace}%KeyNumpad6%
-Numpad7::Send {Space}{Backspace}%KeyNumpad7%
-Numpad8::Send {Space}{Backspace}%KeyNumpad8%
-Numpad9::Send {Space}{Backspace}%KeyNumpad9%
+Numpad1::Send %KeyNumpad1%
+Numpad2::Send %KeyNumpad2%
+Numpad3::Send %KeyNumpad3%
+Numpad4::Send %KeyNumpad4%
+Numpad5::Send %KeyNumpad5%
+Numpad6::Send %KeyNumpad6%
+Numpad7::Send %KeyNumpad7%
+Numpad8::Send %KeyNumpad8%
+Numpad9::Send %KeyNumpad9%
