@@ -1,3 +1,8 @@
+2022/11/27 v1.8.0
+- 'a' key now works like a Ctrl, like how 's' is Shift.
+- 'u' and 'o' are Left Scroll and Right Scroll, like how R and F worked.
+- 'e' and 'd' are now editable keys.
+
 2022/11/14 v1.7.2
 - Removed SendMode Input to add more delay, which fixes the bug where continously pressing CapsLock+Bound key sometimes sends the original key input instead of the hotkey.
 
