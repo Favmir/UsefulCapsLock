@@ -1,3 +1,6 @@
+2022/12/01 v1.7.3
+- Added SetKeyDelay, 0, 0 because the Ctrl held down bug kept happening occasionally(this time it was something with Caps Lock + U/O).
+
 2022/11/14 v1.7.2
 - Removed SendMode Input to add more delay, which fixes the bug where continously pressing CapsLock+Bound key sometimes sends the original key input instead of the hotkey.
 

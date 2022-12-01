@@ -19,6 +19,7 @@
 ;BUT SendMode Input also causes input to leak through even when you're pressing capslock because it's too fast and has no delay.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1
+SetKeyDelay, 0, 0 ; To fix the Ctrl held down bug (prevents touchpad scrolling and zoom. It goes away if you send Ctrl input with CapsLock+O)
 
 ;KeyHistory
 
@@ -64,10 +65,11 @@ if(NoStartPop == 0)
 	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
 	ifMsgBox, Cancel
 	{
+		NoStartPop := 1
 		FileDelete %A_ScriptDir%\Settings\NoStartPop
 		FileAppend, 
 		(
-		NoStartPop := 1
+		NoStartPop := %NoStartPop%
 		), %A_ScriptDir%\Settings\NoStartPop, UTF-8
 	}
 }
@@ -535,6 +537,7 @@ Return
 
 
 #If EnableHK
+;Send {CtrlUp}{ShiftUp}{AltUp}
 w::
 if LockMouse{
 	DisableMouse := false
