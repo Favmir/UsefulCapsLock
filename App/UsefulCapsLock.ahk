@@ -415,7 +415,6 @@ SHIFT+F12=F24
 
 #If DisableMouse	;Synaptics Clickpad driver's wheel scroll is undetectable by AHK
 TouchpadToggle(0)
-Send {CtrlUp}
 BlockInput, MouseMove
 *LButton::
 *RButton::
@@ -497,13 +496,13 @@ m::Send ∑
 ~l::
 ~m::
 ~n::
-~o::
+
 ~p::
 ~q::
 ~r::
 
 ~t::
-~u::
+
 ~v::
 ~w::
 ~x::
