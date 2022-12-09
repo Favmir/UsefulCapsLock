@@ -1,3 +1,6 @@
+2022/12/09 v1.7.4
+- Changed SetKeyDelay to 20, 0 and removed e,d,r,f,h,i,j,k,l,; from the 'mouse disabling key list' like s already was. All to get that annoying Ctrl stuck bug.
+
 2022/12/01 v1.7.3
 - Added SetKeyDelay, 0, 0 because the Ctrl held down bug kept happening occasionally(this time it was something with Caps Lock + U/O).
 

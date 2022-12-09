@@ -485,21 +485,21 @@ m::Send ∑
 ~a::
 ~b::
 ~c::
-~d::
-~e::
-~f::
+
+
+
 ~g::
-~h::
-~i::
-~j::
-~k::
-~l::
+
+
+
+
+
 ~m::
 ~n::
 
 ~p::
 ~q::
-~r::
+
 
 ~t::
 
@@ -511,7 +511,7 @@ m::Send ∑
 ~,::
 ~.::
 ~/::
-~`;::
+
 ~'::
 ~[::
 ~]::
@@ -625,8 +625,8 @@ i::Up
 j::Left
 k::Down
 l::Right
-e::^Up
-d::^Down
+e::Send {LCtrl}{Up}
+d::Send {LCtrl}{Down}
 r::Send {Up %UpScroll%}
 f::Send {Down %DownScroll%}
 u::^Left
