@@ -538,7 +538,7 @@ Return
 #If EnableHK
 ;Send {CtrlUp}{ShiftUp}{AltUp}
 w::
-if LockMouse{
+if (LockMouse){
 	DisableMouse := false
 	BlockInput, MouseMoveOff
 	TouchpadToggle(1)
@@ -625,8 +625,8 @@ i::Up
 j::Left
 k::Down
 l::Right
-e::Send {Ctrl}{Up}
-d::Send {Ctrl}{Down}
+e::Send ^{Up}
+d::Send ^{Down}
 r::Send {Up %UpScroll%}
 f::Send {Down %DownScroll%}
 u::^Left
