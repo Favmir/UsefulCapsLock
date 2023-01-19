@@ -28,8 +28,14 @@ SetKeyDelay, 20, 0 ; To fix the Ctrl held down bug (prevents touchpad scrolling 
 ;for synaptics toucpad
 ;ToucpadToggle(1) enables, (0) disables, (else) toggles.
 TouchpadToggle(setter) {
-	Enabled := ComObjError(False)
-	SynAPI:=ComObjCreate("SynCtrl.SynAPICtrl"), SynDev:=ComObjCreate("SynCtrl.SynDeviceCtrl")
+	Enabled := ComObjError(False)	; prevents the error message showing when synaptics driver isn't installed. try block below does the same job so this is for redundancy.
+	
+	try{
+		SynAPI:=ComObjCreate("SynCtrl.SynAPICtrl"), SynDev:=ComObjCreate("SynCtrl.SynDeviceCtrl")
+	}
+	catch e{
+		return
+	}
 	SynAPI.Initialize
 	SynDev.Select(SynAPI.FindDevice(0,2,-1))
 	if(setter == 0){
@@ -40,6 +46,8 @@ TouchpadToggle(setter) {
 		SynDev.SetLongProperty(268435825, State:=(!SynDev.GetLongProperty(268435825) ? 1 : 0))
 	}
 }
+
+
 
 ;============ Add Tray ============
 Menu, Tray, Icon,,, 1	;freeze current icon

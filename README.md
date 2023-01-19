@@ -8,7 +8,7 @@ I made this script to solve my problem of
 2. arrow keys are in such inconvient places when you need to move your cursor through text a lot
 3. Wasted time and effort when I want to use a character that isn't present in my keyboard (Em Dash, for example, which I use for everyday writing)
 
-Some people solve these problems via a Pointing Stick(a.k.a. red nipple) but I prefer my solution.
+Some people solve these problems via a Pointing Stick(a.k.a. red nipple), and some try to find and install a VIM plugin on every app they have. I prefer my solution.
 
 ## Installation
 Well, this is a portable program, so you don't need to 'install' this per se.
@@ -28,9 +28,9 @@ I've left this script running while playing games, and so far had no problem at 
 
 I've only tested a few multiplayer games:
 * Monster Hunter World/Rise - Hotkeys don't work on text boxes for some reason. No negative consequences(Monster Hunter doesn't ban cheats at all anyways).
-* Overwatch - Works. Doesn't detect this as a cheating software.
-* Team Fortress 2 - No problem.
-* Lost Ark - Detects any autohotkey process on launch and refuses to log you in. You have to quit the script to run the game.
+* Overwatch - Works. Used this script for years and I never got banned.
+* Team Fortress 2 - No problem. (Valve should ban more cheaters btw the game's unplayable)
+* Lost Ark - Detects any autohotkey process on launch and refuses to log you in(probably to prevent AFK farms). You have to quit the script to run the game.
 
 ## Changelog
 [Open Changelog](Changelog.md)

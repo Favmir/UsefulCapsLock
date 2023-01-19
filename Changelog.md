@@ -1,5 +1,6 @@
 2022/01/17 v1.7.5
 - Ctrl stuck bug was still happening. Changed LCtrl hotkey to ^
+- Better error handling when Synaptics Touchpad driver isn't installed.
 
 2022/12/09 v1.7.4
 - Changed SetKeyDelay to 20, 0 and removed e,d,r,f,h,i,j,k,l,; from the 'mouse disabling key list' like s already was. All to get that annoying Ctrl stuck bug.
