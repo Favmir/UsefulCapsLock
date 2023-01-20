@@ -1,3 +1,6 @@
+2022/01/20 v1.8.0
+- Fixed Setting read&write for exe file. Now it uses .ini file instead of #include.
+
 2022/01/20 v1.7.6
 - GuiSize is now automatically set based on resolution and scale of primary monitor.
 - Fixed No Welcome Popup option(previous method only worked for .ahk file and not compiled .exe). It now uses .ini file instead of #include.

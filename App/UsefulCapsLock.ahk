@@ -61,9 +61,6 @@ Menu, Tray, Add, %TrayMenuPause%, TrayPause
 Menu, Tray, Add, %TrayMenuQuit%, TrayQuit
 Menu, Tray, Default, %TrayMenuPause%
 
-
-
-
 ;=========================== Initialize
 isWelcomeDone := false
 NoStartPop := 0
@@ -84,7 +81,7 @@ EnableHK := false
 SetCapsLockState Off
 EnableSuper := false
 
-#include %A_ScriptDir%\Settings\Keys
+GoSub ReadSettings
 #include %A_ScriptDir%\Scripts\BuildMainGui.ahk
 
 
@@ -184,8 +181,8 @@ GuiAbout:
 return
 
 GuiDefault:
-	FileDelete %A_ScriptDir%\Settings\Keys
-	FileCopy %A_ScriptDir%\Settings\Keys_Default, %A_ScriptDir%\Settings\Keys, 1
+	FileDelete %A_ScriptDir%\Settings\Settings.ini
+	FileCopy %A_ScriptDir%\Settings\Settings_Default, %A_ScriptDir%\Settings\Settings.ini, 1
 	GoSub ReadSettings
 	GoSub GuiRefresh
 return
@@ -248,57 +245,104 @@ GuiRefresh:
 return
 
 ReadSettings:
-	#IncludeAgain, %A_ScriptDir%\Settings\Keys
+	Path := A_ScriptDir . "\Settings\Settings.ini"
+	IniRead, UpScroll, %Path%, Scroll, UpScroll
+	IniRead, DownScroll, %Path%, Scroll, DownScroll
+
+	Section := "HotKey"
+	IniRead, KeyGrave, %Path%, %Section%, KeyGrave
+	IniRead, Key1, %Path%, %Section%, Key1
+	IniRead, Key2, %Path%, %Section%, Key2
+	IniRead, Key3, %Path%, %Section%, Key3
+	IniRead, Key4, %Path%, %Section%, Key4
+	IniRead, Key5, %Path%, %Section%, Key5
+	IniRead, Key7, %Path%, %Section%, Key7
+	IniRead, Key8, %Path%, %Section%, Key8
+	IniRead, Key9, %Path%, %Section%, Key9
+	IniRead, Key0, %Path%, %Section%, Key0
+	IniRead, KeyHyphen, %Path%, %Section%, KeyHyphen
+	IniRead, KeyEqual, %Path%, %Section%, KeyEqual
+	IniRead, KeyQ, %Path%, %Section%, KeyQ
+	IniRead, KeyT, %Path%, %Section%, KeyT
+	IniRead, KeyY, %Path%, %Section%, KeyY
+	IniRead, KeyP, %Path%, %Section%, KeyP
+	IniRead, KeyLBracket, %Path%, %Section%, KeyLBracket
+	IniRead, KeyRBracket, %Path%, %Section%, KeyRBracket
+	IniRead, KeyBSlash, %Path%, %Section%, KeyBSlash
+	IniRead, KeyA, %Path%, %Section%, KeyA
+	IniRead, KeyG, %Path%, %Section%, KeyG
+	IniRead, KeyQuote, %Path%, %Section%, KeyQuote
+	IniRead, KeyZ, %Path%, %Section%, KeyZ
+	IniRead, KeyX, %Path%, %Section%, KeyX
+	IniRead, KeyC, %Path%, %Section%, KeyC
+	IniRead, KeyV, %Path%, %Section%, KeyV
+	IniRead, KeyB, %Path%, %Section%, KeyB
+	IniRead, KeyN, %Path%, %Section%, KeyN
+	IniRead, KeyM, %Path%, %Section%, KeyM
+	IniRead, KeyComma, %Path%, %Section%, KeyComma
+	IniRead, KeyPeriod, %Path%, %Section%, KeyPeriod
+	IniRead, KeySlash, %Path%, %Section%, KeySlash
+	IniRead, KeyNumpad1, %Path%, %Section%, KeyNumpad1
+	IniRead, KeyNumpad2, %Path%, %Section%, KeyNumpad2
+	IniRead, KeyNumpad3, %Path%, %Section%, KeyNumpad3
+	IniRead, KeyNumpad4, %Path%, %Section%, KeyNumpad4
+	IniRead, KeyNumpad5, %Path%, %Section%, KeyNumpad5
+	IniRead, KeyNumpad6, %Path%, %Section%, KeyNumpad6
+	IniRead, KeyNumpad7, %Path%, %Section%, KeyNumpad7
+	IniRead, KeyNumpad8, %Path%, %Section%, KeyNumpad8
+	IniRead, KeyNumpad9, %Path%, %Section%, KeyNumpad9
+
 return
 
 WriteSettings:
-	FileDelete %A_ScriptDir%\Settings\Keys
-	FileAppend,
-	(
-UpScroll := %UpScroll%
-DownScroll := %DownScroll%
-KeyGrave = %KeyGrave%
-Key1 = %Key1%
-Key2 = %Key2%
-Key3 = %Key3%
-Key4 = %Key4%
-Key5 = %Key5%
-Key7 = %Key7%
-Key8 = %Key8%
-Key9 = %Key9%
-Key0 = %Key0%
-KeyHyphen = %KeyHyphen%
-KeyEqual = %KeyEqual%
-KeyQ = %KeyQ%
-KeyT = %KeyT%
-KeyY = %KeyY%
-KeyP = %KeyP%
-KeyLBracket = %KeyLBracket%
-KeyRBracket = %KeyRBracket%
-KeyBSlash = %KeyBSlash%
-KeyA = %KeyA%
-KeyG = %KeyG%
-KeyQuote = %KeyQuote%
-KeyZ = %KeyZ%
-KeyX = %KeyX%
-KeyC = %KeyC%
-KeyV = %KeyV%
-KeyB = %KeyB%
-KeyN = %KeyN%
-KeyM = %KeyM%
-KeyComma = %KeyComma%
-KeyPeriod = %KeyPeriod%
-KeySlash = %KeySlash%
-KeyNumpad1 = %KeyNumpad1%
-KeyNumpad2 = %KeyNumpad2%
-KeyNumpad3 = %KeyNumpad3%
-KeyNumpad4 = %KeyNumpad4%
-KeyNumpad5 = %KeyNumpad5%
-KeyNumpad6 = %KeyNumpad6%
-KeyNumpad7 = %KeyNumpad7%
-KeyNumpad8 = %KeyNumpad8%
-KeyNumpad9 = %KeyNumpad9%
-	), %A_ScriptDir%\Settings\Keys, UTF-8
+	Path := A_ScriptDir . "\Settings\Settings.ini"
+	
+	IniWrite, %UpScroll%, %Path%, Scroll, UpScroll
+	IniWrite, %DownScroll%, %Path%, Scroll, DownScroll
+
+	Section := "HotKey"
+	IniWrite, %KeyGrave%, %Path%, %Section%, KeyGrave
+	IniWrite, %Key1%, %Path%, %Section%, Key1
+	IniWrite, %Key2%, %Path%, %Section%, Key2
+	IniWrite, %Key3%, %Path%, %Section%, Key3
+	IniWrite, %Key4%, %Path%, %Section%, Key4
+	IniWrite, %Key5%, %Path%, %Section%, Key5
+	IniWrite, %Key7%, %Path%, %Section%, Key7
+	IniWrite, %Key8%, %Path%, %Section%, Key8
+	IniWrite, %Key9%, %Path%, %Section%, Key9
+	IniWrite, %Key0%, %Path%, %Section%, Key0
+	IniWrite, %KeyHyphen%, %Path%, %Section%, KeyHyphen
+	IniWrite, %KeyEqual%, %Path%, %Section%, KeyEqual
+	IniWrite, %KeyQ%, %Path%, %Section%, KeyQ
+	IniWrite, %KeyT%, %Path%, %Section%, KeyT
+	IniWrite, %KeyY%, %Path%, %Section%, KeyY
+	IniWrite, %KeyP%, %Path%, %Section%, KeyP
+	IniWrite, %KeyLBracket%, %Path%, %Section%, KeyLBracket
+	IniWrite, %KeyRBracket%, %Path%, %Section%, KeyRBracket
+	IniWrite, %KeyBSlash%, %Path%, %Section%, KeyBSlash
+	IniWrite, %KeyA%, %Path%, %Section%, KeyA
+	IniWrite, %KeyG%, %Path%, %Section%, KeyG
+	IniWrite, %KeyQuote%, %Path%, %Section%, KeyQuote
+	IniWrite, %KeyZ%, %Path%, %Section%, KeyZ
+	IniWrite, %KeyX%, %Path%, %Section%, KeyX
+	IniWrite, %KeyC%, %Path%, %Section%, KeyC
+	IniWrite, %KeyV%, %Path%, %Section%, KeyV
+	IniWrite, %KeyB%, %Path%, %Section%, KeyB
+	IniWrite, %KeyN%, %Path%, %Section%, KeyN
+	IniWrite, %KeyM%, %Path%, %Section%, KeyM
+	IniWrite, %KeyComma%, %Path%, %Section%, KeyComma
+	IniWrite, %KeyPeriod%, %Path%, %Section%, KeyPeriod
+	IniWrite, %KeySlash%, %Path%, %Section%, KeySlash
+	IniWrite, %KeyNumpad1%, %Path%, %Section%, KeyNumpad1
+	IniWrite, %KeyNumpad2%, %Path%, %Section%, KeyNumpad2
+	IniWrite, %KeyNumpad3%, %Path%, %Section%, KeyNumpad3
+	IniWrite, %KeyNumpad4%, %Path%, %Section%, KeyNumpad4
+	IniWrite, %KeyNumpad5%, %Path%, %Section%, KeyNumpad5
+	IniWrite, %KeyNumpad6%, %Path%, %Section%, KeyNumpad6
+	IniWrite, %KeyNumpad7%, %Path%, %Section%, KeyNumpad7
+	IniWrite, %KeyNumpad8%, %Path%, %Section%, KeyNumpad8
+	IniWrite, %KeyNumpad9%, %Path%, %Section%, KeyNumpad9
+
 return
 
 GuiPause:
