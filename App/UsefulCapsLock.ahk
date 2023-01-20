@@ -66,48 +66,18 @@ Menu, Tray, Default, %TrayMenuPause%
 
 ;=========================== Initialize
 isWelcomeDone := false
-#include %A_ScriptDir%\Settings\NoStartPop
+NoStartPop := 0
+IniRead, NoStartPop, %A_ScriptDir%\Settings\Settings.ini, Start, NoWelcomePopup
 
-if(NoStartPop == 0)
+if(NoStartPop != 1)
 {
 	MsgBox, 4097, %PopTitleWelcome%, %PopDescWelcome%,
 	ifMsgBox, Cancel
 	{
 		NoStartPop := 1
-		FileDelete %A_ScriptDir%\Settings\NoStartPop
-		FileAppend, 
-		(
-		NoStartPop := %NoStartPop%
-		), %A_ScriptDir%\Settings\NoStartPop, UTF-8
+		IniWrite, %NoStartPop%, %A_ScriptDir%\Settings\Settings.ini, Start, NoWelcomePopup
 	}
 }
-
-/*
-
-if(NoStartPop == 0){
-	Gui, WelcomeWin:New, +AlwaysOnTop -Sysmenu, %PopTitleWelcome%
-	Gui, Font, s12, Segoe UI
-	Gui, Add, Text,, %PopDescWelcome%
-	Gui, Font, s15 Bold, Segoe UI
-	Gui, Add, Checkbox, Center vNeverShow, %PopButtonWelcomeNever%
-	Gui, Add, Button, Center gWelcomeCheck, %PopButtonWelcomeOK%
-}
-Gui, WelcomeWin:Show
-return
-
-
-WelcomeCheck:
-	if(NeverShow == 1)
-	{
-		FileDelete %A_ScriptDir%\Settings\NoStartPop
-		FileAppend, 
-		(
-		NoStartPop := 1
-		), %A_ScriptDir%\Settings\NoStartPop, UTF-8
-	}
-	Gui, WelcomeWin:Hide
-return
-*/
 
 isWelcomeDone := true
 EnableHK := false
