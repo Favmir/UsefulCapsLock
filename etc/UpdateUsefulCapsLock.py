@@ -48,3 +48,5 @@ shutil.copytree(src_path, new_folder_path)
 # Run the batch file in the new folder path
 # stdin=subprocess.DEVNULL bypasses the "Press any key to continue..." message
 subprocess.run(['cmd.exe', '/c', 'Add to Startup.bat'], cwd=os.path.join(new_folder_path,'App'), stdin=subprocess.DEVNULL)
+
+os.system('start ' + dst_path)
