@@ -18,6 +18,7 @@
 ;SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 ;BUT SendMode Input also causes input to leak through even when you're pressing capslock because it's too fast and has no delay.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+;Don't replace A_ScriptDir with A_WorkingDir ! It doesn't compile.
 SetBatchLines -1
 SetKeyDelay, 20, 0 ; To fix the Ctrl held down bug (prevents touchpad scrolling and zoom. It goes away if you press hotkey that caused it)
 
@@ -82,7 +83,16 @@ SetCapsLockState Off
 EnableSuper := false
 
 GoSub ReadSettings
+IniRead, MouseLockOnStart, %SettingsPath%, Start, MouseLockOnStart
+if(MouseLockOnStart == 1){
+	LockMouse := true
+}
 #include %A_ScriptDir%\Scripts\BuildMainGui.ahk
+if(LockMouse == true){
+	GoSub ShowMLockGui
+}
+
+
 
 
 TrayTitle:
@@ -190,15 +200,22 @@ return
 GuiSave:
 	Gui Submit
 	GoSub WriteSettings
+	if(LockMouse == true)
+	{
+		GoSub ShowMLockGui
+	}
+	IniWrite, %LockMouse%, %SettingsPath%, Start, MouseLockOnStart
 	GoSub GuiRefresh
 return
 
 GuiCancel:
 	Gui Show, Hide, %AppTitle%
+	GoSub ShowMLockGui
 	GoSub GuiRefresh
 return
 
 GuiRefresh:
+	GuiControl,, Mouse Lock, %LockMouse%
 	GuiControl,, UpScroll, %UpScroll%
 	GuiControl,, DownScroll, %DownScroll%
 	GuiControl,, KeyGrave, %KeyGrave%
@@ -245,103 +262,111 @@ GuiRefresh:
 return
 
 ReadSettings:
-	Path := A_ScriptDir . "\Settings\Settings.ini"
-	IniRead, UpScroll, %Path%, Scroll, UpScroll
-	IniRead, DownScroll, %Path%, Scroll, DownScroll
+	SettingsPath := A_ScriptDir . "\Settings\Settings.ini"
+	IniRead, UpScroll, %SettingsPath%, Scroll, UpScroll
+	IniRead, DownScroll, %SettingsPath%, Scroll, DownScroll
 
 	Section := "HotKey"
-	IniRead, KeyGrave, %Path%, %Section%, KeyGrave
-	IniRead, Key1, %Path%, %Section%, Key1
-	IniRead, Key2, %Path%, %Section%, Key2
-	IniRead, Key3, %Path%, %Section%, Key3
-	IniRead, Key4, %Path%, %Section%, Key4
-	IniRead, Key5, %Path%, %Section%, Key5
-	IniRead, Key7, %Path%, %Section%, Key7
-	IniRead, Key8, %Path%, %Section%, Key8
-	IniRead, Key9, %Path%, %Section%, Key9
-	IniRead, Key0, %Path%, %Section%, Key0
-	IniRead, KeyHyphen, %Path%, %Section%, KeyHyphen
-	IniRead, KeyEqual, %Path%, %Section%, KeyEqual
-	IniRead, KeyQ, %Path%, %Section%, KeyQ
-	IniRead, KeyT, %Path%, %Section%, KeyT
-	IniRead, KeyY, %Path%, %Section%, KeyY
-	IniRead, KeyP, %Path%, %Section%, KeyP
-	IniRead, KeyLBracket, %Path%, %Section%, KeyLBracket
-	IniRead, KeyRBracket, %Path%, %Section%, KeyRBracket
-	IniRead, KeyBSlash, %Path%, %Section%, KeyBSlash
-	IniRead, KeyA, %Path%, %Section%, KeyA
-	IniRead, KeyG, %Path%, %Section%, KeyG
-	IniRead, KeyQuote, %Path%, %Section%, KeyQuote
-	IniRead, KeyZ, %Path%, %Section%, KeyZ
-	IniRead, KeyX, %Path%, %Section%, KeyX
-	IniRead, KeyC, %Path%, %Section%, KeyC
-	IniRead, KeyV, %Path%, %Section%, KeyV
-	IniRead, KeyB, %Path%, %Section%, KeyB
-	IniRead, KeyN, %Path%, %Section%, KeyN
-	IniRead, KeyM, %Path%, %Section%, KeyM
-	IniRead, KeyComma, %Path%, %Section%, KeyComma
-	IniRead, KeyPeriod, %Path%, %Section%, KeyPeriod
-	IniRead, KeySlash, %Path%, %Section%, KeySlash
-	IniRead, KeyNumpad1, %Path%, %Section%, KeyNumpad1
-	IniRead, KeyNumpad2, %Path%, %Section%, KeyNumpad2
-	IniRead, KeyNumpad3, %Path%, %Section%, KeyNumpad3
-	IniRead, KeyNumpad4, %Path%, %Section%, KeyNumpad4
-	IniRead, KeyNumpad5, %Path%, %Section%, KeyNumpad5
-	IniRead, KeyNumpad6, %Path%, %Section%, KeyNumpad6
-	IniRead, KeyNumpad7, %Path%, %Section%, KeyNumpad7
-	IniRead, KeyNumpad8, %Path%, %Section%, KeyNumpad8
-	IniRead, KeyNumpad9, %Path%, %Section%, KeyNumpad9
+	IniRead, KeyGrave, %SettingsPath%, %Section%, KeyGrave
+	IniRead, Key1, %SettingsPath%, %Section%, Key1
+	IniRead, Key2, %SettingsPath%, %Section%, Key2
+	IniRead, Key3, %SettingsPath%, %Section%, Key3
+	IniRead, Key4, %SettingsPath%, %Section%, Key4
+	IniRead, Key5, %SettingsPath%, %Section%, Key5
+	IniRead, Key7, %SettingsPath%, %Section%, Key7
+	IniRead, Key8, %SettingsPath%, %Section%, Key8
+	IniRead, Key9, %SettingsPath%, %Section%, Key9
+	IniRead, Key0, %SettingsPath%, %Section%, Key0
+	IniRead, KeyHyphen, %SettingsPath%, %Section%, KeyHyphen
+	IniRead, KeyEqual, %SettingsPath%, %Section%, KeyEqual
+	IniRead, KeyQ, %SettingsPath%, %Section%, KeyQ
+	IniRead, KeyT, %SettingsPath%, %Section%, KeyT
+	IniRead, KeyY, %SettingsPath%, %Section%, KeyY
+	IniRead, KeyP, %SettingsPath%, %Section%, KeyP
+	IniRead, KeyLBracket, %SettingsPath%, %Section%, KeyLBracket
+	IniRead, KeyRBracket, %SettingsPath%, %Section%, KeyRBracket
+	IniRead, KeyBSlash, %SettingsPath%, %Section%, KeyBSlash
+	IniRead, KeyA, %SettingsPath%, %Section%, KeyA
+	IniRead, KeyG, %SettingsPath%, %Section%, KeyG
+	IniRead, KeyQuote, %SettingsPath%, %Section%, KeyQuote
+	IniRead, KeyZ, %SettingsPath%, %Section%, KeyZ
+	IniRead, KeyX, %SettingsPath%, %Section%, KeyX
+	IniRead, KeyC, %SettingsPath%, %Section%, KeyC
+	IniRead, KeyV, %SettingsPath%, %Section%, KeyV
+	IniRead, KeyB, %SettingsPath%, %Section%, KeyB
+	IniRead, KeyN, %SettingsPath%, %Section%, KeyN
+	IniRead, KeyM, %SettingsPath%, %Section%, KeyM
+	IniRead, KeyComma, %SettingsPath%, %Section%, KeyComma
+	IniRead, KeyPeriod, %SettingsPath%, %Section%, KeyPeriod
+	IniRead, KeySlash, %SettingsPath%, %Section%, KeySlash
+	IniRead, KeyNumpad1, %SettingsPath%, %Section%, KeyNumpad1
+	IniRead, KeyNumpad2, %SettingsPath%, %Section%, KeyNumpad2
+	IniRead, KeyNumpad3, %SettingsPath%, %Section%, KeyNumpad3
+	IniRead, KeyNumpad4, %SettingsPath%, %Section%, KeyNumpad4
+	IniRead, KeyNumpad5, %SettingsPath%, %Section%, KeyNumpad5
+	IniRead, KeyNumpad6, %SettingsPath%, %Section%, KeyNumpad6
+	IniRead, KeyNumpad7, %SettingsPath%, %Section%, KeyNumpad7
+	IniRead, KeyNumpad8, %SettingsPath%, %Section%, KeyNumpad8
+	IniRead, KeyNumpad9, %SettingsPath%, %Section%, KeyNumpad9
 
 return
 
 WriteSettings:
-	Path := A_ScriptDir . "\Settings\Settings.ini"
+	SettingsPath := A_ScriptDir . "\Settings\Settings.ini"
 	
-	IniWrite, %UpScroll%, %Path%, Scroll, UpScroll
-	IniWrite, %DownScroll%, %Path%, Scroll, DownScroll
+	if(LockMouse == true)
+	{
+		IniWrite, 1, %SettingsPath%, Start, MouseLockOnStart
+	}
+	else
+	{
+		IniWrite, 0, %SettingsPath%, Start, MouseLockOnStart
+	}
+	IniWrite, %UpScroll%, %SettingsPath%, Scroll, UpScroll
+	IniWrite, %DownScroll%, %SettingsPath%, Scroll, DownScroll
 
 	Section := "HotKey"
-	IniWrite, %KeyGrave%, %Path%, %Section%, KeyGrave
-	IniWrite, %Key1%, %Path%, %Section%, Key1
-	IniWrite, %Key2%, %Path%, %Section%, Key2
-	IniWrite, %Key3%, %Path%, %Section%, Key3
-	IniWrite, %Key4%, %Path%, %Section%, Key4
-	IniWrite, %Key5%, %Path%, %Section%, Key5
-	IniWrite, %Key7%, %Path%, %Section%, Key7
-	IniWrite, %Key8%, %Path%, %Section%, Key8
-	IniWrite, %Key9%, %Path%, %Section%, Key9
-	IniWrite, %Key0%, %Path%, %Section%, Key0
-	IniWrite, %KeyHyphen%, %Path%, %Section%, KeyHyphen
-	IniWrite, %KeyEqual%, %Path%, %Section%, KeyEqual
-	IniWrite, %KeyQ%, %Path%, %Section%, KeyQ
-	IniWrite, %KeyT%, %Path%, %Section%, KeyT
-	IniWrite, %KeyY%, %Path%, %Section%, KeyY
-	IniWrite, %KeyP%, %Path%, %Section%, KeyP
-	IniWrite, %KeyLBracket%, %Path%, %Section%, KeyLBracket
-	IniWrite, %KeyRBracket%, %Path%, %Section%, KeyRBracket
-	IniWrite, %KeyBSlash%, %Path%, %Section%, KeyBSlash
-	IniWrite, %KeyA%, %Path%, %Section%, KeyA
-	IniWrite, %KeyG%, %Path%, %Section%, KeyG
-	IniWrite, %KeyQuote%, %Path%, %Section%, KeyQuote
-	IniWrite, %KeyZ%, %Path%, %Section%, KeyZ
-	IniWrite, %KeyX%, %Path%, %Section%, KeyX
-	IniWrite, %KeyC%, %Path%, %Section%, KeyC
-	IniWrite, %KeyV%, %Path%, %Section%, KeyV
-	IniWrite, %KeyB%, %Path%, %Section%, KeyB
-	IniWrite, %KeyN%, %Path%, %Section%, KeyN
-	IniWrite, %KeyM%, %Path%, %Section%, KeyM
-	IniWrite, %KeyComma%, %Path%, %Section%, KeyComma
-	IniWrite, %KeyPeriod%, %Path%, %Section%, KeyPeriod
-	IniWrite, %KeySlash%, %Path%, %Section%, KeySlash
-	IniWrite, %KeyNumpad1%, %Path%, %Section%, KeyNumpad1
-	IniWrite, %KeyNumpad2%, %Path%, %Section%, KeyNumpad2
-	IniWrite, %KeyNumpad3%, %Path%, %Section%, KeyNumpad3
-	IniWrite, %KeyNumpad4%, %Path%, %Section%, KeyNumpad4
-	IniWrite, %KeyNumpad5%, %Path%, %Section%, KeyNumpad5
-	IniWrite, %KeyNumpad6%, %Path%, %Section%, KeyNumpad6
-	IniWrite, %KeyNumpad7%, %Path%, %Section%, KeyNumpad7
-	IniWrite, %KeyNumpad8%, %Path%, %Section%, KeyNumpad8
-	IniWrite, %KeyNumpad9%, %Path%, %Section%, KeyNumpad9
+	IniWrite, %KeyGrave%, %SettingsPath%, %Section%, KeyGrave
+	IniWrite, %Key1%, %SettingsPath%, %Section%, Key1
+	IniWrite, %Key2%, %SettingsPath%, %Section%, Key2
+	IniWrite, %Key3%, %SettingsPath%, %Section%, Key3
+	IniWrite, %Key4%, %SettingsPath%, %Section%, Key4
+	IniWrite, %Key5%, %SettingsPath%, %Section%, Key5
+	IniWrite, %Key7%, %SettingsPath%, %Section%, Key7
+	IniWrite, %Key8%, %SettingsPath%, %Section%, Key8
+	IniWrite, %Key9%, %SettingsPath%, %Section%, Key9
+	IniWrite, %Key0%, %SettingsPath%, %Section%, Key0
+	IniWrite, %KeyHyphen%, %SettingsPath%, %Section%, KeyHyphen
+	IniWrite, %KeyEqual%, %SettingsPath%, %Section%, KeyEqual
+	IniWrite, %KeyQ%, %SettingsPath%, %Section%, KeyQ
+	IniWrite, %KeyT%, %SettingsPath%, %Section%, KeyT
+	IniWrite, %KeyY%, %SettingsPath%, %Section%, KeyY
+	IniWrite, %KeyP%, %SettingsPath%, %Section%, KeyP
+	IniWrite, %KeyLBracket%, %SettingsPath%, %Section%, KeyLBracket
+	IniWrite, %KeyRBracket%, %SettingsPath%, %Section%, KeyRBracket
+	IniWrite, %KeyBSlash%, %SettingsPath%, %Section%, KeyBSlash
+	IniWrite, %KeyA%, %SettingsPath%, %Section%, KeyA
+	IniWrite, %KeyG%, %SettingsPath%, %Section%, KeyG
+	IniWrite, %KeyQuote%, %SettingsPath%, %Section%, KeyQuote
+	IniWrite, %KeyZ%, %SettingsPath%, %Section%, KeyZ
+	IniWrite, %KeyX%, %SettingsPath%, %Section%, KeyX
+	IniWrite, %KeyC%, %SettingsPath%, %Section%, KeyC
+	IniWrite, %KeyV%, %SettingsPath%, %Section%, KeyV
+	IniWrite, %KeyB%, %SettingsPath%, %Section%, KeyB
+	IniWrite, %KeyN%, %SettingsPath%, %Section%, KeyN
+	IniWrite, %KeyM%, %SettingsPath%, %Section%, KeyM
+	IniWrite, %KeyComma%, %SettingsPath%, %Section%, KeyComma
+	IniWrite, %KeyPeriod%, %SettingsPath%, %Section%, KeyPeriod
+	IniWrite, %KeySlash%, %SettingsPath%, %Section%, KeySlash
+	IniWrite, %KeyNumpad1%, %SettingsPath%, %Section%, KeyNumpad1
+	IniWrite, %KeyNumpad2%, %SettingsPath%, %Section%, KeyNumpad2
+	IniWrite, %KeyNumpad3%, %SettingsPath%, %Section%, KeyNumpad3
+	IniWrite, %KeyNumpad4%, %SettingsPath%, %Section%, KeyNumpad4
+	IniWrite, %KeyNumpad5%, %SettingsPath%, %Section%, KeyNumpad5
+	IniWrite, %KeyNumpad6%, %SettingsPath%, %Section%, KeyNumpad6
+	IniWrite, %KeyNumpad7%, %SettingsPath%, %Section%, KeyNumpad7
+	IniWrite, %KeyNumpad8%, %SettingsPath%, %Section%, KeyNumpad8
+	IniWrite, %KeyNumpad9%, %SettingsPath%, %Section%, KeyNumpad9
 
 return
 
@@ -357,13 +382,14 @@ return
 !CapsLock::
 #CapsLock::
 GuiOpen:
-if isWelcomeDone ;Make sure GUI doesn't appear before Welcome Msgbox is gone
+if( isWelcomeDone && (WinExist(PopTitleMouseLock) == 0) ) ;Make sure GUI doesn't appear before Welcome Msgbox is gone
 {
 	DisableMouse := false
 	BlockInput, MouseMoveOff
-	if (WinExist("Useful Caps Lock")){
+	if (WinActive(AppTitle)){
         Gui, Show, Hide,
-	}else{
+		GoSub ShowMLockGui
+	}else {
         Gui, Show,, %AppTitle%
 	}
 }
@@ -372,13 +398,9 @@ return
 ;======== Mouse Lock Menu
 LockMouse := false
 DisableMouse := false
-GuiMLock:
+
+ShowMLockGui:
 if LockMouse{
-	LockMouse := false
-	DisableMouse := false
-}
-else{
-	LockMouse := true
 	DisableMouse := true
 	BlockInput, MouseMove
 	TouchpadToggle(0)
@@ -390,6 +412,10 @@ else{
 	Gui, Show
 	mousegetpos, sx, sy
 	settimer, MouseMoveCheck, 250
+}
+else
+{
+	DisableMouse := false
 }
 return
 
@@ -410,7 +436,7 @@ return
 
 CapsLock::
 EnableHK := true
-if LockMouse{
+if( LockMouse && (WinActive(AppTitle) == 0)){
 	DisableMouse := true
 	BlockInput, MouseMove
 	TouchpadToggle(0)
@@ -551,9 +577,11 @@ m::Send ∑
 ~-::
 ~=::
 ~\::
-DisableMouse := true
-BlockInput, MouseMove
-TouchpadToggle(0)
+if( WinActive(AppTitle) == 0){
+	DisableMouse := true
+	BlockInput, MouseMove
+	TouchpadToggle(0)
+}
 Return
 
 

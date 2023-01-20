@@ -1,4 +1,23 @@
-#include %A_ScriptDir%\Settings\Gui
+Section := "Gui"
+IniRead, Gap, %SettingsPath%, %Section%, Gap
+IniRead, Width, %SettingsPath%, %Section%, Width
+IniRead, Height, %SettingsPath%, %Section%, Height
+IniRead, BackspaceWidth, %SettingsPath%, %Section%, BackspaceWidth
+IniRead, TabWidth, %SettingsPath%, %Section%, TabWidth
+IniRead, CapslockWidth, %SettingsPath%, %Section%, CapslockWidth
+IniRead, LeftShiftWidth, %SettingsPath%, %Section%, LeftShiftWidth
+IniRead, ControlWidth, %SettingsPath%, %Section%, ControlWidth
+IniRead, ColorBg, %SettingsPath%, %Section%, ColorBg
+IniRead, ColorTxt, %SettingsPath%, %Section%, ColorTxt
+IniRead, ColorPanelTxt, %SettingsPath%, %Section%, ColorPanelTxt
+
+TotalWidth := Width * 16 + Gap * 18 + BackspaceWidth
+TotalHeight := Height * 7 + Gap * 8
+;Multiplier for the size of GUI. Value is 6 when on 1920 width monitor.
+;Scale option in Display settings changes A_ScreenDPI. 96 DPI means 100% scale, 144 is 150%.
+GuiSize := Floor(Min((A_ScreenWidth / TotalWidth), (A_ScreenHeight / TotalHeight)) / (A_ScreenDPI/96))
+
+
 LayoutG := Floor(Gap * GuiSize)				;Gap between keys
 LayoutW := Floor(Width * GuiSize)				;Width of regular key
 LayoutH := Floor(Height * GuiSize)				;Height of regular key
@@ -57,7 +76,7 @@ Gui Add, Edit, c%ColorPanelTxt% Background xp+%LayoutWG% yp w%LayoutWDescFront% 
 Temp := LayoutTotalW - LayoutWTab - LayoutG
 Gui Add, Button, x%Temp% yp w%LayoutWTab% hp -VScroll +Center gGuiAbout, About
 Temp := Temp - LayoutWTab - LayoutG
-Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center vLockMouse gGuiMLock, Mouse Lock
+Gui Add, CheckBox, x%Temp% yp wp hp -VScroll +Center vLockMouse Checked%LockMouse%, Mouse Lock
 Temp := (Temp - LayoutWDescFront - LayoutWG - LayoutG*3)
 Temp2 := LayoutWG + LayoutWDescFront + LayoutG*2
 Gui Add, Edit, c%ColorPanelTxt% x%Temp2% yp w%Temp% hp -VScroll +Center +ReadOnly -Theme, %MenuDescFront2%

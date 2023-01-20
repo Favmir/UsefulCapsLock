@@ -1,5 +1,10 @@
 2022/01/20 v1.8.0
-- Fixed Setting read&write for exe file. Now it uses .ini file instead of #include.
+- Fixed Keys & Gui setting read & write function which was broken for compiled exe file. Now it uses .ini file instead of #include.
+- Mouse Lock now requires pressing 'Save' button to be activated, just like every other options.
+- Mouse Lock state is remembered on restart.
+- Mouse Lock help popup now appears on restart.
+- Mouse Lock help popup now appears every time when closing the GUI.
+- Mouse Lock doesn't activate while GUI is visible.
 
 2022/01/20 v1.7.6
 - GuiSize is now automatically set based on resolution and scale of primary monitor.
