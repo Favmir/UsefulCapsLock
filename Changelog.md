@@ -1,3 +1,6 @@
+2022/01/20 v1.8.1
+- Fixed a bug where Mouse Lock checkbox state wasn't updating if you hid the window using Cancel button.
+
 2022/01/20 v1.8.0
 - Fixed Keys & Gui setting read & write function which was broken for compiled exe file. Now it uses .ini file instead of #include.
 - Mouse Lock now requires pressing 'Save' button to be activated, just like every other options.

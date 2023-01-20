@@ -82,11 +82,8 @@ EnableHK := false
 SetCapsLockState Off
 EnableSuper := false
 
+SettingsPath := A_ScriptDir . "\Settings\Settings.ini"
 GoSub ReadSettings
-IniRead, MouseLockOnStart, %SettingsPath%, Start, MouseLockOnStart
-if(MouseLockOnStart == 1){
-	LockMouse := true
-}
 #include %A_ScriptDir%\Scripts\BuildMainGui.ahk
 if(LockMouse == true){
 	GoSub ShowMLockGui
@@ -191,20 +188,23 @@ GuiAbout:
 return
 
 GuiDefault:
-	FileDelete %A_ScriptDir%\Settings\Settings.ini
-	FileCopy %A_ScriptDir%\Settings\Settings_Default, %A_ScriptDir%\Settings\Settings.ini, 1
+	SettingsPath := A_ScriptDir . "\Settings\Settings_Default.ini"
 	GoSub ReadSettings
+
+	SettingsPath := A_ScriptDir . "\Settings\Settings.ini"
+	GoSub WriteSettings
+	
 	GoSub GuiRefresh
 return
 
 GuiSave:
 	Gui Submit
+	SettingsPath := A_ScriptDir . "\Settings\Settings.ini"
 	GoSub WriteSettings
 	if(LockMouse == true)
 	{
 		GoSub ShowMLockGui
 	}
-	IniWrite, %LockMouse%, %SettingsPath%, Start, MouseLockOnStart
 	GoSub GuiRefresh
 return
 
@@ -261,8 +261,15 @@ GuiRefresh:
 	GuiControl,, KeyNumpad9, %KeyNumpad9%
 return
 
+;use SettingsPath := A_ScriptDir . "\Settings\Settings.ini" before running this routine
 ReadSettings:
-	SettingsPath := A_ScriptDir . "\Settings\Settings.ini"
+	IniRead, MouseLockOnStart, %SettingsPath%, Start, MouseLockOnStart
+	if(MouseLockOnStart == 1){
+		LockMouse := true
+	}else{
+		LockMouse := false
+	}
+
 	IniRead, UpScroll, %SettingsPath%, Scroll, UpScroll
 	IniRead, DownScroll, %SettingsPath%, Scroll, DownScroll
 
@@ -390,6 +397,7 @@ if( isWelcomeDone && (WinExist(PopTitleMouseLock) == 0) ) ;Make sure GUI doesn't
         Gui, Show, Hide,
 		GoSub ShowMLockGui
 	}else {
+		GuiControl,, Mouse Lock, %LockMouse%
         Gui, Show,, %AppTitle%
 	}
 }
