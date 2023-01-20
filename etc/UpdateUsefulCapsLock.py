@@ -3,6 +3,7 @@
 # Place this script in the same folder as the UsefulCapsLock folder
 # (NOT insdie the UsefulCapsLock folder!)
 # Set dst_path (archive folder) to wherever you wish
+# IMPORTANT!! Make sure to replace backslashes(\) in path string with normal slash(/)!!!
 
 
 import os
