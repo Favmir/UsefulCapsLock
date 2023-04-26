@@ -13,10 +13,9 @@ IniRead, ColorPanelTxt, %SettingsPath%, %Section%, ColorPanelTxt
 
 TotalWidth := Width * 16 + Gap * 18 + BackspaceWidth
 TotalHeight := Height * 7 + Gap * 8
-;Multiplier for the size of GUI. Value is 6 when on 1920 width monitor.
-;Scale option in Display settings changes A_ScreenDPI. 96 DPI means 100% scale, 144 is 150%.
+;Multiplier for the GUI size to make it fill the screen. Value is 6 when on 1920 width monitor.
+;Scale option in Display settings changes A_ScreenDPI. 100% scale is 96 DPI, 150% is 144 DPI.
 GuiSize := Floor(Min((A_ScreenWidth / TotalWidth), (A_ScreenHeight / TotalHeight)) / (A_ScreenDPI/96))
-
 
 LayoutG := Floor(Gap * GuiSize)				;Gap between keys
 LayoutW := Floor(Width * GuiSize)				;Width of regular key
