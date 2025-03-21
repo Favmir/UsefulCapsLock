@@ -1,5 +1,6 @@
 2025/03/21 v1.8.4
-- Subscript and superscript (5, 6 keys) function rewritten.
+- Subscript and superscript (5, 6 keys) function rewritten. Added capital alphabet superscripts.
+- Empty keybinds are now ignored instead of inserting space+backspace.
 - Updated default key shortcuts.
 
 2025/03/18 v1.8.3

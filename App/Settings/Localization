@@ -14,7 +14,8 @@ MenuDescFront := "Press Caps Lock and another key simultaneously to use.`nTo cus
 MenuDescFront2 := "Alt + Caps Lock`nShow interface"
 
 MenuTitleAbout := "About"
-MenuDescAbout := "Useful CapsLock`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n— Move your cursor through text without reaching for arrow keys.`n— Shortcuts for typing special characters and phrases of choice. `n— Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
+emDash := Chr(0x2014)
+MenuDescAbout := "Useful CapsLock`n`nThe CapsLock button's position on the keyboard is way too good for what it's used for. Now you can do these with CapsLock: `n" . emDash . " Move your cursor through text without reaching for arrow keys.`n" . emDash . " Shortcuts for typing special characters and phrases of choice.`n" . emDash . " Lock Touchpad to prevent the palm of your hand triggering it. `n`n                                           Written by FavmirY@gmail.com"
 
 PopTitleMouseLock := "Touchpad lock activated"
 PopDescMouseLock := "No more Touchpad palm presses!`n`nTyping disables mouse input.`n`nPress {CapsLock + Tab} to use mouse again."
