@@ -1,3 +1,16 @@
+2025/03/21 v1.8.4
+- Subscript and superscript (5, 6 keys) function rewritten.
+- Updated default key shortcuts.
+
+2025/03/18 v1.8.3
+- Turned W, E, D into hotkeys.
+- Better superscript and subscript conversion support.
+- Updated default key shortcuts.
+
+2025/03/17 v1.8.2
+- Added subscripts functionality at key 5.
+- Updated the default key shortcuts.
+
 2022/01/20 v1.8.1
 - Fixed a bug where Mouse Lock checkbox state wasn't updating if you hid the window using Cancel button.
 

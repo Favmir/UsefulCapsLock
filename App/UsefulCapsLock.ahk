@@ -123,6 +123,10 @@ TrayQuit:
 return
 
 ;======= Button Funcitions
+DescKey5:
+	Msgbox, 4096, %MenuTitleKeys%, %MenuDescKey5%,
+return
+
 DescKey6:
 	Msgbox, 4096, %MenuTitleKeys%, %MenuDescKey6%,
 return
@@ -223,7 +227,6 @@ GuiRefresh:
 	GuiControl,, Key2, %Key2%
 	GuiControl,, Key3, %Key3%
 	GuiControl,, Key4, %Key4%
-	GuiControl,, Key5, %Key5%
 	GuiControl,, Key7, %Key7%
 	GuiControl,, Key8, %Key8%
 	GuiControl,, Key9, %Key9%
@@ -231,6 +234,8 @@ GuiRefresh:
 	GuiControl,, KeyHypen, %KeyHyphen%
 	GuiControl,, KeyEqual, %KeyEqual%
 	GuiControl,, KeyQ, %KeyQ%
+	GuiControl,, KeyW, %KeyW%
+	GuiControl,, KeyE, %KeyE%
 	GuiControl,, KeyT, %KeyT%
 	GuiControl,, KeyY, %KeyY%
 	GuiControl,, KeyP, %KeyP%
@@ -238,6 +243,7 @@ GuiRefresh:
 	GuiControl,, KeyRBracket, %KeyRBracket%
 	GuiControl,, KeyBSlash, %KeyBSlash%
 	GuiControl,, KeyA, %KeyA%
+	GuiControl,, KeyD, %KeyD%
 	GuiControl,, KeyG, %KeyG%
 	GuiControl,, KeyQuote, %KeyQuote%
 	GuiControl,, KeyZ, %KeyZ%
@@ -279,7 +285,6 @@ ReadSettings:
 	IniRead, Key2, %SettingsPath%, %Section%, Key2
 	IniRead, Key3, %SettingsPath%, %Section%, Key3
 	IniRead, Key4, %SettingsPath%, %Section%, Key4
-	IniRead, Key5, %SettingsPath%, %Section%, Key5
 	IniRead, Key7, %SettingsPath%, %Section%, Key7
 	IniRead, Key8, %SettingsPath%, %Section%, Key8
 	IniRead, Key9, %SettingsPath%, %Section%, Key9
@@ -287,6 +292,8 @@ ReadSettings:
 	IniRead, KeyHyphen, %SettingsPath%, %Section%, KeyHyphen
 	IniRead, KeyEqual, %SettingsPath%, %Section%, KeyEqual
 	IniRead, KeyQ, %SettingsPath%, %Section%, KeyQ
+	IniRead, KeyW, %SettingsPath%, %Section%, KeyW
+	IniRead, KeyE, %SettingsPath%, %Section%, KeyE
 	IniRead, KeyT, %SettingsPath%, %Section%, KeyT
 	IniRead, KeyY, %SettingsPath%, %Section%, KeyY
 	IniRead, KeyP, %SettingsPath%, %Section%, KeyP
@@ -294,6 +301,8 @@ ReadSettings:
 	IniRead, KeyRBracket, %SettingsPath%, %Section%, KeyRBracket
 	IniRead, KeyBSlash, %SettingsPath%, %Section%, KeyBSlash
 	IniRead, KeyA, %SettingsPath%, %Section%, KeyA
+	;IniRead, KeyS, %SettingsPath%, %Section%, KeyS
+	IniRead, KeyD, %SettingsPath%, %Section%, KeyD
 	IniRead, KeyG, %SettingsPath%, %Section%, KeyG
 	IniRead, KeyQuote, %SettingsPath%, %Section%, KeyQuote
 	IniRead, KeyZ, %SettingsPath%, %Section%, KeyZ
@@ -338,7 +347,6 @@ WriteSettings:
 	IniWrite, %Key2%, %SettingsPath%, %Section%, Key2
 	IniWrite, %Key3%, %SettingsPath%, %Section%, Key3
 	IniWrite, %Key4%, %SettingsPath%, %Section%, Key4
-	IniWrite, %Key5%, %SettingsPath%, %Section%, Key5
 	IniWrite, %Key7%, %SettingsPath%, %Section%, Key7
 	IniWrite, %Key8%, %SettingsPath%, %Section%, Key8
 	IniWrite, %Key9%, %SettingsPath%, %Section%, Key9
@@ -346,6 +354,8 @@ WriteSettings:
 	IniWrite, %KeyHyphen%, %SettingsPath%, %Section%, KeyHyphen
 	IniWrite, %KeyEqual%, %SettingsPath%, %Section%, KeyEqual
 	IniWrite, %KeyQ%, %SettingsPath%, %Section%, KeyQ
+	IniWrite, %KeyW%, %SettingsPath%, %Section%, KeyW
+	IniWrite, %KeyE%, %SettingsPath%, %Section%, KeyE
 	IniWrite, %KeyT%, %SettingsPath%, %Section%, KeyT
 	IniWrite, %KeyY%, %SettingsPath%, %Section%, KeyY
 	IniWrite, %KeyP%, %SettingsPath%, %Section%, KeyP
@@ -353,6 +363,8 @@ WriteSettings:
 	IniWrite, %KeyRBracket%, %SettingsPath%, %Section%, KeyRBracket
 	IniWrite, %KeyBSlash%, %SettingsPath%, %Section%, KeyBSlash
 	IniWrite, %KeyA%, %SettingsPath%, %Section%, KeyA
+	;IniWrite, %KeyS%, %SettingsPath%, %Section%, KeyS
+	IniWrite, %KeyD%, %SettingsPath%, %Section%, KeyD
 	IniWrite, %KeyG%, %SettingsPath%, %Section%, KeyG
 	IniWrite, %KeyQuote%, %SettingsPath%, %Section%, KeyQuote
 	IniWrite, %KeyZ%, %SettingsPath%, %Section%, KeyZ
@@ -595,7 +607,7 @@ Return
 
 #If EnableHK
 ;Send {CtrlUp}{ShiftUp}{AltUp}
-w::
+Tab::
 if (LockMouse){
 	DisableMouse := false
 	BlockInput, MouseMoveOff
@@ -611,13 +623,73 @@ Down::
 EnableSuper := false
 return
 */
+/*
+
+5::
+Clipsaved := ClipboardAll
+Clipboard := ""
+Send ^{x}
+ClipWait, 1
+if(RegExMatch(Clipboard, "[^0-9+\-=\(\)*aehijklmnoprstuvx]") == 0){ ;can be subscriptified ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
+	;Msgbox, "Can be subscriptized" + %Clipboard% ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑₒₓₕₖₗₘₙₚₛₜ
+	Clipboard := StrReplace(Clipboard, "0", "₀",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "1", "₁",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "2", "₂",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "3", "₃",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "4", "₄",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "5", "₅",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "6", "₆",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "7", "₇",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "8", "₈",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "9", "₉",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "+", "₊",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "-", "₋",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "=", "₌",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "(", "₍",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, ")", "₎",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "*", "͙",, Limit := -1)
+
+	Clipboard := StrReplace(Clipboard, "a", "ₐ",, Limit := -1)
+	;bcd
+	Clipboard := StrReplace(Clipboard, "e", "ₑ",, Limit := -1)
+	;fg
+	Clipboard := StrReplace(Clipboard, "h", "ₕ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "i", "ᵢ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "j", "ⱼ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "k", "ₖ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "l", "ₗ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "m", "ₘ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "n", "ₙ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "o", "ₒ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "p", "ₚ",, Limit := -1)
+	;q
+	Clipboard := StrReplace(Clipboard, "r", "ᵣ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "s", "ₛ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "t", "ₜ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "u", "ᵤ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "v", "ᵥ",, Limit := -1)
+	;w
+	Clipboard := StrReplace(Clipboard, "x", "ₓ",, Limit := -1)
+	;yz
+	SendRaw, % Clipboard
+}else{
+	;Msgbox, "Cannot be subscriptized"
+	if(RegExMatch(Clipboard, "`r`n") != 0){
+		Clipboard := StrReplace(Clipboard, "`r`n", "",, Limit := -1)
+		SendRaw _₍%Clipboard%₎`n
+	}
+	else SendRaw _₍%Clipboard%₎
+}
+Clipboard := Clipsaved
+Clipsaved := ""	;free up memory
+return
 
 6::
 Clipsaved := ClipboardAll
 Clipboard := ""
 Send ^{x}
 ClipWait, 1
-if(RegExMatch(Clipboard, "[^0-9+\-\(\)=nijklmxyz]") == 0){ ;can be superscriptified ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
+if(RegExMatch(Clipboard, "[^0-9+\-=\(\)*abcdefghijklmnoprstuvwxyz]") == 0){ ;can be superscriptified ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ
 	;Msgbox, "Can be superscriptized" + %Clipboard%
 	Clipboard := StrReplace(Clipboard, "0", "⁰",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "1", "¹",, Limit := -1)
@@ -634,17 +706,10 @@ if(RegExMatch(Clipboard, "[^0-9+\-\(\)=nijklmxyz]") == 0){ ;can be superscriptif
 	Clipboard := StrReplace(Clipboard, "=", "⁼",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "(", "⁽",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, ")", "⁾",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "n", "ⁿ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "i", "ⁱ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "*", "⃰",, Limit := -1)
+
 	;ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ
-	Clipboard := StrReplace(Clipboard, "j", "ʲ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "k", "ᵏ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "l", "ˡ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "m", "ᵐ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "x", "ˣ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "y", "ʸ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "z", "ᶻ",, Limit := -1)
-/*
+
 	Clipboard := StrReplace(Clipboard, "a", "ᵃ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "b", "ᵇ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "c", "ᶜ",, Limit := -1)
@@ -653,38 +718,124 @@ if(RegExMatch(Clipboard, "[^0-9+\-\(\)=nijklmxyz]") == 0){ ;can be superscriptif
 	Clipboard := StrReplace(Clipboard, "f", "ᶠ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "g", "ᵍ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "h", "ʰ",, Limit := -1)
-
+	Clipboard := StrReplace(Clipboard, "i", "ⁱ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "j", "ʲ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "k", "ᵏ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "l", "ˡ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "m", "ᵐ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "n", "ⁿ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "o", "ᵒ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "p", "ᵖ",, Limit := -1)
-	Clipboard := StrReplace(Clipboard, "q", "𐞥",, Limit := -1)
+	;Clipboard := StrReplace(Clipboard, "q", "𐞥",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "r", "ʳ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "s", "ˢ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "t", "ᵗ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "u", "ᵘ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "v", "ᵛ",, Limit := -1)
 	Clipboard := StrReplace(Clipboard, "w", "ʷ",, Limit := -1)
-*/
+	Clipboard := StrReplace(Clipboard, "x", "ˣ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "y", "ʸ",, Limit := -1)
+	Clipboard := StrReplace(Clipboard, "z", "ᶻ",, Limit := -1)
+
 	;Msgbox, %Clipboard%
 	SendRaw, % Clipboard
 }else{
 	;Msgbox, "Cannot be superscriptized"
 	if(RegExMatch(Clipboard, "`r`n") != 0){
 		Clipboard := StrReplace(Clipboard, "`r`n", "",, Limit := -1)
-		SendRaw ^(%Clipboard%)`n
+		SendRaw ^⁽%Clipboard%⁾`n
 	}
-	else SendRaw ^(%Clipboard%)
+	else SendRaw ^⁽%Clipboard%⁾
 }
 Clipboard := Clipsaved
 Clipsaved := ""	;free up memory
 return
+*/
+
+5::
+Clipsaved := ClipboardAll
+Clipboard := ""
+Send ^{x}
+ClipWait, 1
+
+SubscriptTextBefore := "0123456789+-=()*aehijklmnoprstuvx"
+SubscriptTextAfter  := "₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎͙ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ"
+
+result := ""
+canBeSubscript := true
+
+Loop, Parse, Clipboard
+{
+	char := A_LoopField
+	pos := InStr(SubscriptTextBefore, char)
+	if (pos)
+		result .= SubStr(SubscriptTextAfter, pos, 1)
+	else {
+		canBeSubscript := false
+		break
+	}
+}
+
+if (canBeSubscript) {
+	SendRaw, % result
+} else {
+	if(RegExMatch(Clipboard, "`r`n") != 0){
+		Clipboard := StrReplace(Clipboard, "`r`n", "",, Limit := -1)
+		SendRaw _₍%Clipboard%₎`n
+	}
+	else SendRaw _₍%Clipboard%₎
+}
+
+Clipboard := Clipsaved
+Clipsaved := ""
+return
+
+6::
+Clipsaved := ClipboardAll
+Clipboard := ""
+Send ^{x}
+ClipWait, 1
+
+SuperscriptTextBefore := "0123456789+-=()*abcdefghijklmnopqrstuvwxyz"
+SuperscriptTextAfter  := "⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾⃰ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ"
+
+result := ""
+canBeSuperscript := true
+
+Loop, Parse, Clipboard
+{
+	char := A_LoopField
+	pos := InStr(SuperscriptTextBefore, char)
+	if (pos)
+		result .= SubStr(SuperscriptTextAfter, pos, 1)
+	else {
+		canBeSuperscript := false
+		break
+	}
+}
+
+if (canBeSuperscript) {
+	SendRaw, % result
+} else {
+	if(RegExMatch(Clipboard, "`r`n") != 0){
+		Clipboard := StrReplace(Clipboard, "`r`n", "",, Limit := -1)
+		SendRaw ^⁽%Clipboard%⁾`n
+	}
+	else SendRaw ^⁽%Clipboard%⁾
+}
+
+Clipboard := Clipsaved
+Clipsaved := ""
+return
+
 
 ; Navigate: Press CapsLock and these keys to navigate without moving your hands.
 i::Up
 j::Left
 k::Down
 l::Right
-e::Send ^{Up}
-d::Send ^{Down}
+;e::Send ^{Up}
+;d::Send ^{Down}
 r::Send {Up %UpScroll%}
 f::Send {Down %DownScroll%}
 u::^Left
@@ -713,7 +864,7 @@ s & `;::Send +{End}
 2::Send {Space}{Backspace}%Key2%
 3::Send {Space}{Backspace}%Key3%
 4::Send {Space}{Backspace}%Key4%
-5::Send {Space}{Backspace}%Key5%
+;5::Send {Space}{Backspace}%Key5%
 ;6::Send {Space}{Backspace}%Key6%
 7::Send {Space}{Backspace}%Key7%
 8::Send {Space}{Backspace}%Key8%
@@ -722,8 +873,8 @@ s & `;::Send +{End}
 -::Send {Space}{Backspace}%KeyHyphen%
 =::Send {Space}{Backspace}%KeyEqual%
 q::Send {Space}{Backspace}%KeyQ%
-;w::Send {Space}{Backspace}%KeyW%
-;e::Send {Space}{Backspace}%KeyE%
+w::Send {Space}{Backspace}%KeyW%
+e::Send {Space}{Backspace}%KeyE%
 ;r::Send {Space}{Backspace}%KeyR%
 t::Send {Space}{Backspace}%KeyT%
 y::Send {Space}{Backspace}%KeyY%
@@ -736,7 +887,7 @@ p::Send {Space}{Backspace}%KeyP%
 \::Send {Space}{Backspace}%KeyBSlash%
 a::Send {Space}{Backspace}%KeyA%
 ;s::Send {Space}{Backspace}%KeyS%
-;d::Send {Space}{Backspace}%KeyD%
+d::Send {Space}{Backspace}%KeyD%
 ;f::Send {Space}{Backspace}%KeyF%
 g::Send {Space}{Backspace}%KeyG%
 ;h::Send {Space}{Backspace}%KeyH%
